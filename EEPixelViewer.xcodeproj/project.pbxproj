@@ -29,7 +29,6 @@
 		516EB7F61D76530D00CF8DF5 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 516EB7F51D76530D00CF8DF5 /* GLKit.framework */; };
 		516EB7F81D76536700CF8DF5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 516EB7F71D76536700CF8DF5 /* Accelerate.framework */; };
 		516EB7FA1D7655CA00CF8DF5 /* PixelFormats.plist in Resources */ = {isa = PBXBuildFile; fileRef = 516EB7F91D7655CA00CF8DF5 /* PixelFormats.plist */; };
-		5186AF5D1D7A34A300CCC782 /* rgba.png in Resources */ = {isa = PBXBuildFile; fileRef = 5186AF5C1D7A34A300CCC782 /* rgba.png */; };
 		5186AF5F1D7A37B300CCC782 /* PixelViewer_RGBA.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 5186AF5E1D7A37B300CCC782 /* PixelViewer_RGBA.glsl */; };
 /* End PBXBuildFile section */
 
@@ -63,7 +62,6 @@
 		516EB7F51D76530D00CF8DF5 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		516EB7F71D76536700CF8DF5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		516EB7F91D7655CA00CF8DF5 /* PixelFormats.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PixelFormats.plist; sourceTree = "<group>"; };
-		5186AF5C1D7A34A300CCC782 /* rgba.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rgba.png; sourceTree = "<group>"; };
 		5186AF5E1D7A37B300CCC782 /* PixelViewer_RGBA.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PixelViewer_RGBA.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,7 +95,6 @@
 			isa = PBXGroup;
 			children = (
 				5161A2F11D794B3B0012818A /* yuv.png */,
-				5186AF5C1D7A34A300CCC782 /* rgba.png */,
 				513713631D823A15006D63D5 /* iPad Screen.png */,
 				516EB7F31D76529400CF8DF5 /* iPhones.png */,
 			);
@@ -218,7 +215,6 @@
 				5186AF5F1D7A37B300CCC782 /* PixelViewer_RGBA.glsl in Resources */,
 				516EB7DD1D764F4600CF8DF5 /* LaunchScreen.storyboard in Resources */,
 				513713661D8388E6006D63D5 /* PixelViewer_RGB.glsl in Resources */,
-				5186AF5D1D7A34A300CCC782 /* rgba.png in Resources */,
 				5137133E1D7D3089006D63D5 /* ContentModes.plist in Resources */,
 				516EB7EE1D764FFD00CF8DF5 /* PixelViewer_YpCbCr_3P.glsl in Resources */,
 				516EB7FA1D7655CA00CF8DF5 /* PixelFormats.plist in Resources */,
