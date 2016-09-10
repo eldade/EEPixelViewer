@@ -7,15 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5137133E1D7D3089006D63D5 /* ContentModes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5137133D1D7D3089006D63D5 /* ContentModes.plist */; };
+		513713401D7D41A8006D63D5 /* SampleImages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5137133F1D7D41A8006D63D5 /* SampleImages.plist */; };
+		513713421D7F5A23006D63D5 /* PixelViewer_YpCbCr_2P.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 513713411D7F5A23006D63D5 /* PixelViewer_YpCbCr_2P.glsl */; };
+		513713491D81251D006D63D5 /* SampleImageConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 513713481D81251D006D63D5 /* SampleImageConverter.m */; };
+		5137134B1D814C28006D63D5 /* PixelViewer_YpCbCrA_1P.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 5137134A1D814C28006D63D5 /* PixelViewer_YpCbCrA_1P.glsl */; };
+		513713641D823A15006D63D5 /* iPad Screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 513713631D823A15006D63D5 /* iPad Screen.png */; };
+		513713661D8388E6006D63D5 /* PixelViewer_RGB.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 513713651D8388E6006D63D5 /* PixelViewer_RGB.glsl */; };
+		5161A2F21D794B3B0012818A /* yuv.png in Resources */ = {isa = PBXBuildFile; fileRef = 5161A2F11D794B3B0012818A /* yuv.png */; };
 		516EB7CF1D764F4600CF8DF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 516EB7CE1D764F4600CF8DF5 /* main.m */; };
 		516EB7D21D764F4600CF8DF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 516EB7D11D764F4600CF8DF5 /* AppDelegate.m */; };
 		516EB7D51D764F4600CF8DF5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 516EB7D41D764F4600CF8DF5 /* ViewController.m */; };
 		516EB7D81D764F4600CF8DF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 516EB7D61D764F4600CF8DF5 /* Main.storyboard */; };
 		516EB7DA1D764F4600CF8DF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 516EB7D91D764F4600CF8DF5 /* Assets.xcassets */; };
 		516EB7DD1D764F4600CF8DF5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 516EB7DB1D764F4600CF8DF5 /* LaunchScreen.storyboard */; };
+		516EB7ED1D764FFD00CF8DF5 /* EEPixelViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 516EB7E41D764FFD00CF8DF5 /* EEPixelViewer.m */; };
+		516EB7EE1D764FFD00CF8DF5 /* PixelViewer_YpCbCr_3P.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 516EB7E61D764FFD00CF8DF5 /* PixelViewer_YpCbCr_3P.glsl */; };
+		516EB7F11D764FFD00CF8DF5 /* OGLProgramManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 516EB7EB1D764FFD00CF8DF5 /* OGLProgramManager.m */; };
+		516EB7F21D764FFD00CF8DF5 /* VertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 516EB7EC1D764FFD00CF8DF5 /* VertexShader.glsl */; };
+		516EB7F41D76529400CF8DF5 /* iPhones.png in Resources */ = {isa = PBXBuildFile; fileRef = 516EB7F31D76529400CF8DF5 /* iPhones.png */; };
+		516EB7F61D76530D00CF8DF5 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 516EB7F51D76530D00CF8DF5 /* GLKit.framework */; };
+		516EB7F81D76536700CF8DF5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 516EB7F71D76536700CF8DF5 /* Accelerate.framework */; };
+		516EB7FA1D7655CA00CF8DF5 /* PixelFormats.plist in Resources */ = {isa = PBXBuildFile; fileRef = 516EB7F91D7655CA00CF8DF5 /* PixelFormats.plist */; };
+		5186AF5D1D7A34A300CCC782 /* rgba.png in Resources */ = {isa = PBXBuildFile; fileRef = 5186AF5C1D7A34A300CCC782 /* rgba.png */; };
+		5186AF5F1D7A37B300CCC782 /* PixelViewer_RGBA.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 5186AF5E1D7A37B300CCC782 /* PixelViewer_RGBA.glsl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5137133D1D7D3089006D63D5 /* ContentModes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ContentModes.plist; sourceTree = "<group>"; };
+		5137133F1D7D41A8006D63D5 /* SampleImages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SampleImages.plist; sourceTree = "<group>"; };
+		513713411D7F5A23006D63D5 /* PixelViewer_YpCbCr_2P.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PixelViewer_YpCbCr_2P.glsl; sourceTree = "<group>"; };
+		513713471D81251D006D63D5 /* SampleImageConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleImageConverter.h; sourceTree = "<group>"; };
+		513713481D81251D006D63D5 /* SampleImageConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleImageConverter.m; sourceTree = "<group>"; };
+		5137134A1D814C28006D63D5 /* PixelViewer_YpCbCrA_1P.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PixelViewer_YpCbCrA_1P.glsl; sourceTree = "<group>"; };
+		513713631D823A15006D63D5 /* iPad Screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad Screen.png"; sourceTree = "<group>"; };
+		513713651D8388E6006D63D5 /* PixelViewer_RGB.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PixelViewer_RGB.glsl; sourceTree = "<group>"; };
+		5161A2F11D794B3B0012818A /* yuv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuv.png; sourceTree = "<group>"; };
 		516EB7CA1D764F4600CF8DF5 /* EEPixelViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EEPixelViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		516EB7CE1D764F4600CF8DF5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		516EB7D01D764F4600CF8DF5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -26,6 +53,18 @@
 		516EB7D91D764F4600CF8DF5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		516EB7DC1D764F4600CF8DF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		516EB7DE1D764F4600CF8DF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		516EB7E41D764FFD00CF8DF5 /* EEPixelViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEPixelViewer.m; sourceTree = "<group>"; };
+		516EB7E51D764FFD00CF8DF5 /* EEPixelViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEPixelViewer.h; sourceTree = "<group>"; };
+		516EB7E61D764FFD00CF8DF5 /* PixelViewer_YpCbCr_3P.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PixelViewer_YpCbCr_3P.glsl; sourceTree = "<group>"; };
+		516EB7EA1D764FFD00CF8DF5 /* OGLProgramManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OGLProgramManager.h; sourceTree = "<group>"; };
+		516EB7EB1D764FFD00CF8DF5 /* OGLProgramManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGLProgramManager.m; sourceTree = "<group>"; };
+		516EB7EC1D764FFD00CF8DF5 /* VertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VertexShader.glsl; sourceTree = "<group>"; };
+		516EB7F31D76529400CF8DF5 /* iPhones.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iPhones.png; path = ../../../../Desktop/iPhones.png; sourceTree = "<group>"; };
+		516EB7F51D76530D00CF8DF5 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		516EB7F71D76536700CF8DF5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		516EB7F91D7655CA00CF8DF5 /* PixelFormats.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PixelFormats.plist; sourceTree = "<group>"; };
+		5186AF5C1D7A34A300CCC782 /* rgba.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rgba.png; sourceTree = "<group>"; };
+		5186AF5E1D7A37B300CCC782 /* PixelViewer_RGBA.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PixelViewer_RGBA.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,15 +72,43 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				516EB7F81D76536700CF8DF5 /* Accelerate.framework in Frameworks */,
+				516EB7F61D76530D00CF8DF5 /* GLKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		513713451D7F6645006D63D5 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				516EB7E61D764FFD00CF8DF5 /* PixelViewer_YpCbCr_3P.glsl */,
+				513713411D7F5A23006D63D5 /* PixelViewer_YpCbCr_2P.glsl */,
+				5137134A1D814C28006D63D5 /* PixelViewer_YpCbCrA_1P.glsl */,
+				5186AF5E1D7A37B300CCC782 /* PixelViewer_RGBA.glsl */,
+				513713651D8388E6006D63D5 /* PixelViewer_RGB.glsl */,
+				516EB7EC1D764FFD00CF8DF5 /* VertexShader.glsl */,
+			);
+			name = Shaders;
+			sourceTree = "<group>";
+		};
+		513713461D7F6651006D63D5 /* Sample Images */ = {
+			isa = PBXGroup;
+			children = (
+				5161A2F11D794B3B0012818A /* yuv.png */,
+				5186AF5C1D7A34A300CCC782 /* rgba.png */,
+				513713631D823A15006D63D5 /* iPad Screen.png */,
+				516EB7F31D76529400CF8DF5 /* iPhones.png */,
+			);
+			name = "Sample Images";
+			sourceTree = "<group>";
+		};
 		516EB7C11D764F4600CF8DF5 = {
 			isa = PBXGroup;
 			children = (
+				516EB7F71D76536700CF8DF5 /* Accelerate.framework */,
+				516EB7F51D76530D00CF8DF5 /* GLKit.framework */,
 				516EB7CC1D764F4600CF8DF5 /* EEPixelViewer */,
 				516EB7CB1D764F4600CF8DF5 /* Products */,
 			);
@@ -58,15 +125,26 @@
 		516EB7CC1D764F4600CF8DF5 /* EEPixelViewer */ = {
 			isa = PBXGroup;
 			children = (
+				513713461D7F6651006D63D5 /* Sample Images */,
+				513713451D7F6645006D63D5 /* Shaders */,
+				516EB7E41D764FFD00CF8DF5 /* EEPixelViewer.m */,
+				516EB7E51D764FFD00CF8DF5 /* EEPixelViewer.h */,
+				516EB7EA1D764FFD00CF8DF5 /* OGLProgramManager.h */,
+				516EB7EB1D764FFD00CF8DF5 /* OGLProgramManager.m */,
 				516EB7D01D764F4600CF8DF5 /* AppDelegate.h */,
 				516EB7D11D764F4600CF8DF5 /* AppDelegate.m */,
 				516EB7D31D764F4600CF8DF5 /* ViewController.h */,
 				516EB7D41D764F4600CF8DF5 /* ViewController.m */,
+				513713471D81251D006D63D5 /* SampleImageConverter.h */,
+				513713481D81251D006D63D5 /* SampleImageConverter.m */,
 				516EB7D61D764F4600CF8DF5 /* Main.storyboard */,
 				516EB7D91D764F4600CF8DF5 /* Assets.xcassets */,
 				516EB7DB1D764F4600CF8DF5 /* LaunchScreen.storyboard */,
 				516EB7DE1D764F4600CF8DF5 /* Info.plist */,
 				516EB7CD1D764F4600CF8DF5 /* Supporting Files */,
+				516EB7F91D7655CA00CF8DF5 /* PixelFormats.plist */,
+				5137133F1D7D41A8006D63D5 /* SampleImages.plist */,
+				5137133D1D7D3089006D63D5 /* ContentModes.plist */,
 			);
 			path = EEPixelViewer;
 			sourceTree = "<group>";
@@ -110,6 +188,7 @@
 				TargetAttributes = {
 					516EB7C91D764F4600CF8DF5 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = E54FNFV6AU;
 					};
 				};
 			};
@@ -136,9 +215,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5186AF5F1D7A37B300CCC782 /* PixelViewer_RGBA.glsl in Resources */,
 				516EB7DD1D764F4600CF8DF5 /* LaunchScreen.storyboard in Resources */,
+				513713661D8388E6006D63D5 /* PixelViewer_RGB.glsl in Resources */,
+				5186AF5D1D7A34A300CCC782 /* rgba.png in Resources */,
+				5137133E1D7D3089006D63D5 /* ContentModes.plist in Resources */,
+				516EB7EE1D764FFD00CF8DF5 /* PixelViewer_YpCbCr_3P.glsl in Resources */,
+				516EB7FA1D7655CA00CF8DF5 /* PixelFormats.plist in Resources */,
+				516EB7F21D764FFD00CF8DF5 /* VertexShader.glsl in Resources */,
+				513713641D823A15006D63D5 /* iPad Screen.png in Resources */,
 				516EB7DA1D764F4600CF8DF5 /* Assets.xcassets in Resources */,
+				513713401D7D41A8006D63D5 /* SampleImages.plist in Resources */,
 				516EB7D81D764F4600CF8DF5 /* Main.storyboard in Resources */,
+				516EB7F41D76529400CF8DF5 /* iPhones.png in Resources */,
+				513713421D7F5A23006D63D5 /* PixelViewer_YpCbCr_2P.glsl in Resources */,
+				5137134B1D814C28006D63D5 /* PixelViewer_YpCbCrA_1P.glsl in Resources */,
+				5161A2F21D794B3B0012818A /* yuv.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,7 +243,10 @@
 			files = (
 				516EB7D51D764F4600CF8DF5 /* ViewController.m in Sources */,
 				516EB7D21D764F4600CF8DF5 /* AppDelegate.m in Sources */,
+				516EB7F11D764FFD00CF8DF5 /* OGLProgramManager.m in Sources */,
 				516EB7CF1D764F4600CF8DF5 /* main.m in Sources */,
+				513713491D81251D006D63D5 /* SampleImageConverter.m in Sources */,
+				516EB7ED1D764FFD00CF8DF5 /* EEPixelViewer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,10 +360,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = EEPixelViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eldade.EEPixelViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -276,10 +374,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = EEPixelViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eldade.EEPixelViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -302,6 +403,7 @@
 				516EB7E31D764F4600CF8DF5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

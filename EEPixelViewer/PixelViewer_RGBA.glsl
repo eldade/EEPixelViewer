@@ -24,29 +24,23 @@
 //    WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 //    ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#import <UIKit/UIKit.h>
-#import "EEPixelViewer.h"
-#import "SampleImageConverter.h"
+precision highp float;
 
-@interface ViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+varying highp vec2 TexCoordOut;
+uniform sampler2D texture1;
+
+uniform ivec4 PermuteMap;
+
+void main()
 {
-    NSDictionary *pixelFormats;
-    NSDictionary *contentModes;
-
-    NSArray *sampleImages;
+    highp vec4 pixOriginal = texture2D(texture1, TexCoordOut);
     
-    NSArray *pixelFormatSortedList;
-    NSArray *contentModesSortedList;
-        
-    EESampleImageConverter *imageConverter;
+    highp vec4 pixPermuted;
     
-    NSTimer *timer;
+    pixPermuted.r = pixOriginal[PermuteMap[0]];
+    pixPermuted.g = pixOriginal[PermuteMap[1]];
+    pixPermuted.b = pixOriginal[PermuteMap[2]];
+    pixPermuted.a = pixOriginal[PermuteMap[3]];
+    
+    gl_FragColor = pixPermuted;
 }
-
-@property IBOutlet UIPickerView *formatPicker;
-@property IBOutlet EEPixelViewer *pixelViewer;
-
-@property int planeCount;
-
-@end
-

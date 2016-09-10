@@ -24,29 +24,35 @@
 //    WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 //    ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#import <UIKit/UIKit.h>
-#import "EEPixelViewer.h"
-#import "SampleImageConverter.h"
+// Two-plane YpCbCr shader: Supports all two-plane YpCbCr pixel formats. YpCbCr to RGB conversion
+// is done using a coefficient matrix that's uploaded to the GPU via a uniform matrix. This shader also
+// supports a PermuteMap to support various permutations on channel ordering in the source texture.
 
-@interface ViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+// texture1 contains Yp values, while texture2 contains intervleaved CbCr values (ordering can be altered via PermuteMap).
+
+
+precision highp float;
+
+varying highp vec2 TexCoordOut;
+uniform sampler2D texture1;
+uniform sampler2D texture2;
+uniform sampler2D texture3;
+
+uniform mat4 coefficientMatrix;
+
+uniform vec4 YpCbCrOffsets;
+
+uniform ivec4 PermuteMap;
+
+void main()
 {
-    NSDictionary *pixelFormats;
-    NSDictionary *contentModes;
-
-    NSArray *sampleImages;
+    vec4 YpCbCrToConvert;
     
-    NSArray *pixelFormatSortedList;
-    NSArray *contentModesSortedList;
-        
-    EESampleImageConverter *imageConverter;
+    YpCbCrToConvert[0] = texture2D(texture1, TexCoordOut)[PermuteMap[0]];
+    YpCbCrToConvert[1] = texture2D(texture2, TexCoordOut)[PermuteMap[1]];
+    YpCbCrToConvert[2] = texture2D(texture2, TexCoordOut)[PermuteMap[2]];
     
-    NSTimer *timer;
+    YpCbCrToConvert -= YpCbCrOffsets;
+    
+    gl_FragColor = YpCbCrToConvert * coefficientMatrix;
 }
-
-@property IBOutlet UIPickerView *formatPicker;
-@property IBOutlet EEPixelViewer *pixelViewer;
-
-@property int planeCount;
-
-@end
-

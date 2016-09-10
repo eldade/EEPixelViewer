@@ -24,29 +24,29 @@
 //    WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 //    ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <Accelerate/Accelerate.h>
 #import "EEPixelViewer.h"
-#import "SampleImageConverter.h"
 
-@interface ViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface EESampleImageConverter : NSObject
 {
-    NSDictionary *pixelFormats;
-    NSDictionary *contentModes;
-
-    NSArray *sampleImages;
-    
-    NSArray *pixelFormatSortedList;
-    NSArray *contentModesSortedList;
-        
-    EESampleImageConverter *imageConverter;
-    
-    NSTimer *timer;
+    vImage_Buffer planes[3];
 }
 
-@property IBOutlet UIPickerView *formatPicker;
-@property IBOutlet EEPixelViewer *pixelViewer;
+- (void) RGBA32to32bppRGBA: (vImage_Buffer) sourceBuffer pixelFormat: (int) pixelFormat;
+- (void) RGBA32to16bpp: (vImage_Buffer) sourceBuffer pixelFormat: (int) pixelFormat;
+- (void) RGBA32to24bpp: (vImage_Buffer) sourceBuffer pixelFormat: (int) pixelFormat;
+- (void) RGBA32to2PlanarYpCbCr: (vImage_Buffer) sourceBuffer pixelFormat: (int) pixelFormat;
+- (void) RGBA32to3PlanarYpCbCr: (vImage_Buffer) sourceBuffer pixelFormat: (int) pixelFormat;
+- (void) RGBA32toInterleaved422YpCbCr: (vImage_Buffer) sourceBuffer pixelFormat: (int) pixelFormat;
+- (void) RGBA32toInterleaved444YpCbCr: (vImage_Buffer) sourceBuffer pixelFormat: (int) pixelFormat;
+- (void) RGBA32toInterleaved444YpCbCrA8: (vImage_Buffer) sourceBuffer pixelFormat: (int) pixelFormat;
+- (void) RGBA32toInterleaved444AYpCbCr8: (vImage_Buffer) sourceBuffer pixelFormat: (int) pixelFormat;
+
+- (void) reset;
 
 @property int planeCount;
 
-@end
+- (EEPixelViewerPlane) getPlane: (int) plane;
 
+@end
