@@ -26,42 +26,6 @@
 
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
-#import "OGLProgramManager.h"
-//#import "HTLiveViewTextureLoader.h"
-
-typedef struct {
-    float x;
-    float y;
-} Vertex;
-
-struct RectVertexes
-{
-	Vertex	bottomLeft;
-	Vertex	topLeft;
-	Vertex	topRight;
-	Vertex	bottomRight;
-};
-
-#define RectBottomLeft { -1, -1 }
-#define RectTopLeft { -1, 1 }
-#define RectTopRight  { 1, 1 }
-#define RectBottomRight { 1, -1 }
-
-static Vertex SquareVertices[] =
-{
-    RectBottomLeft,
-    RectTopLeft,
-    RectBottomRight,
-    RectBottomRight,
-    RectTopLeft,
-    RectTopRight,
-};
-
-static const GLubyte SquareIndices[] =
-{
-    0, 1, 2,
-    3, 4, 5,
-};
 
 typedef struct EEPixelViewerPlane
 {
@@ -72,34 +36,6 @@ typedef struct EEPixelViewerPlane
 } EEPixelViewerPlane;
 
 @interface EEPixelViewer : GLKView
-{
-    OGLProgramManager *program;
-
-	GLuint clippedRectVertexBuffer;
-    GLuint clippedRectIndexBuffer;
-	
-	GLuint rectVertexBuffer;
-    GLuint rectIndexBuffer;
-        
-    GLuint textures[4];
-    
-    UILabel *fpsLabel;
-    
-    NSDate *lastTimestamp;
-    NSTimeInterval totalTime;
-    int totalFrames;
-    int maxFrames;
-        
-    struct pixel_buffer_parameters
-    {
-        GLenum  pixelDataFormat;
-        GLenum  dataType;
-        GLint   internalFormat;
-        int     bytesPerPixel;
-    }  pixelBufferParameters[4];
-    
-    UIViewContentMode pixelViewerContentMode;
-}
 
 @property CGRect textureCropRect;
 @property (nonatomic) CGSize sourceImageSize;
