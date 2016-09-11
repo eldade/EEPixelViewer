@@ -35,12 +35,12 @@
 /* Begin PBXFileReference section */
 		5137133D1D7D3089006D63D5 /* ContentModes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ContentModes.plist; sourceTree = "<group>"; };
 		5137133F1D7D41A8006D63D5 /* SampleImages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SampleImages.plist; sourceTree = "<group>"; };
-		513713411D7F5A23006D63D5 /* PixelViewer_YpCbCr_2P.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PixelViewer_YpCbCr_2P.glsl; sourceTree = "<group>"; };
+		513713411D7F5A23006D63D5 /* PixelViewer_YpCbCr_2P.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PixelViewer_YpCbCr_2P.glsl; path = EEPixelViewer/Shaders/PixelViewer_YpCbCr_2P.glsl; sourceTree = SOURCE_ROOT; };
 		513713471D81251D006D63D5 /* SampleImageConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleImageConverter.h; sourceTree = "<group>"; };
 		513713481D81251D006D63D5 /* SampleImageConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleImageConverter.m; sourceTree = "<group>"; };
-		5137134A1D814C28006D63D5 /* PixelViewer_YpCbCrA_1P.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PixelViewer_YpCbCrA_1P.glsl; sourceTree = "<group>"; };
+		5137134A1D814C28006D63D5 /* PixelViewer_YpCbCrA_1P.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PixelViewer_YpCbCrA_1P.glsl; path = EEPixelViewer/Shaders/PixelViewer_YpCbCrA_1P.glsl; sourceTree = SOURCE_ROOT; };
 		513713631D823A15006D63D5 /* iPad Screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad Screen.png"; sourceTree = "<group>"; };
-		513713651D8388E6006D63D5 /* PixelViewer_RGB.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PixelViewer_RGB.glsl; sourceTree = "<group>"; };
+		513713651D8388E6006D63D5 /* PixelViewer_RGB.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PixelViewer_RGB.glsl; path = EEPixelViewer/Shaders/PixelViewer_RGB.glsl; sourceTree = SOURCE_ROOT; };
 		5161A2F11D794B3B0012818A /* yuv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuv.png; sourceTree = "<group>"; };
 		516EB7CA1D764F4600CF8DF5 /* EEPixelViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EEPixelViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		516EB7CE1D764F4600CF8DF5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -54,15 +54,15 @@
 		516EB7DE1D764F4600CF8DF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		516EB7E41D764FFD00CF8DF5 /* EEPixelViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEPixelViewer.m; sourceTree = "<group>"; };
 		516EB7E51D764FFD00CF8DF5 /* EEPixelViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEPixelViewer.h; sourceTree = "<group>"; };
-		516EB7E61D764FFD00CF8DF5 /* PixelViewer_YpCbCr_3P.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PixelViewer_YpCbCr_3P.glsl; sourceTree = "<group>"; };
+		516EB7E61D764FFD00CF8DF5 /* PixelViewer_YpCbCr_3P.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PixelViewer_YpCbCr_3P.glsl; path = EEPixelViewer/Shaders/PixelViewer_YpCbCr_3P.glsl; sourceTree = SOURCE_ROOT; };
 		516EB7EA1D764FFD00CF8DF5 /* OGLProgramManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OGLProgramManager.h; sourceTree = "<group>"; };
 		516EB7EB1D764FFD00CF8DF5 /* OGLProgramManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGLProgramManager.m; sourceTree = "<group>"; };
-		516EB7EC1D764FFD00CF8DF5 /* VertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VertexShader.glsl; sourceTree = "<group>"; };
+		516EB7EC1D764FFD00CF8DF5 /* VertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = VertexShader.glsl; path = EEPixelViewer/Shaders/VertexShader.glsl; sourceTree = SOURCE_ROOT; };
 		516EB7F31D76529400CF8DF5 /* iPhones.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iPhones.png; path = ../../../../Desktop/iPhones.png; sourceTree = "<group>"; };
 		516EB7F51D76530D00CF8DF5 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		516EB7F71D76536700CF8DF5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		516EB7F91D7655CA00CF8DF5 /* PixelFormats.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PixelFormats.plist; sourceTree = "<group>"; };
-		5186AF5E1D7A37B300CCC782 /* PixelViewer_RGBA.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PixelViewer_RGBA.glsl; sourceTree = "<group>"; };
+		5186AF5E1D7A37B300CCC782 /* PixelViewer_RGBA.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PixelViewer_RGBA.glsl; path = EEPixelViewer/Shaders/PixelViewer_RGBA.glsl; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

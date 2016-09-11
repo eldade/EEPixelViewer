@@ -31,6 +31,8 @@
 
 #import "OGLProgramManager.h"
 
+#pragma mark - Internal Definitions
+
 typedef struct {
     float x;
     float y;
@@ -99,6 +101,32 @@ static const GLubyte SquareIndices[] =
 
 @implementation EEPixelViewer
 
+#pragma mark - Initialization Code
+
+- (id) initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    self.context = [[EAGLContext alloc] initWithAPI: kEAGLRenderingAPIOpenGLES3];
+    
+    if (self.context == nil)
+    {
+        self.context = [[EAGLContext alloc] initWithAPI: kEAGLRenderingAPIOpenGLES2];
+        NSLog(@"EEPixelViewer: Initialized with OpenGL ES 2.0");
+    }
+    else
+    {
+        NSLog(@"EEPixelViewer: Initialized with OpenGL ES 3.0");
+    }
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame context:(EAGLContext *)context
+{
+    [EAGLContext setCurrentContext: context];
+    self = [super initWithFrame:frame context:context];
+    return self;
+}
+
 - (void)setupVBOs
 {
 	[program use];
@@ -113,12 +141,6 @@ static const GLubyte SquareIndices[] =
 	// Set our clipping rect vertex array (that gets calculated dynamically during scene rendering):
     glGenBuffers(1, &clippedRectVertexBuffer);
     glGenBuffers(1, &clippedRectIndexBuffer);
-}
-
-- (void) renderInContext: (CGContextRef) context
-{
-	UIImage *screenshot = [self snapshot];
-	[screenshot drawAtPoint: self.frame.origin];
 }
 
 - (void) layoutSubviews
@@ -162,6 +184,8 @@ static const GLubyte SquareIndices[] =
     [self setupVBOs];
 }
 
+#pragma mark - Internal Implementation
+
 - (void) setPixelFormat:(OSType)pixelFormat
 {
     [EAGLContext setCurrentContext: self.context];
@@ -173,7 +197,7 @@ static const GLubyte SquareIndices[] =
     
     switch(_pixelFormat)
     {
-        case kCVPixelFormatType_420YpCbCr8Planar:
+        case kCVPixelFormatType_420YpCbCr8Planar:   /* Planar Component Y'CbCr 8-bit 4:2:0. */
             shaderName = @"PixelViewer_YpCbCr_3P";
             planeCount = 3;
             
@@ -188,7 +212,7 @@ static const GLubyte SquareIndices[] =
             }
 
             break;
-        case kCVPixelFormatType_422YpCbCr8:
+        case kCVPixelFormatType_422YpCbCr8:     /* Component Y'CbCr 8-bit 4:2:2, ordered Cb Y'0 Cr Y'1 */
             // We treat the 422YpCbCr interleaved format as a 2-plane format (even though it is not).
             // This format is packed as Cb Y'0 Cr Y'1, and so each luma pixel is packed with either
             // a Cb or a Cr value. We first load the luma pixels as a RG 16-bit texture, and tell the shader
@@ -211,8 +235,8 @@ static const GLubyte SquareIndices[] =
             pixelBufferParameters[1].bytesPerPixel = 4;
 
             break;
-        case kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange:
-        case kCVPixelFormatType_420YpCbCr8BiPlanarFullRange:
+        case kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange:   /* /* Bi-Planar Component Y'CbCr 8-bit 4:2:0, video-range */
+        case kCVPixelFormatType_420YpCbCr8BiPlanarFullRange:    /* Bi-Planar Component Y'CbCr 8-bit 4:2:0, full-range */
             shaderName = @"PixelViewer_YpCbCr_2P";
             planeCount = 2;
             
@@ -230,7 +254,7 @@ static const GLubyte SquareIndices[] =
             
             break;
             
-        case kCVPixelFormatType_444YpCbCr8:
+        case kCVPixelFormatType_444YpCbCr8:     /* Component Y'CbCr 8-bit 4:4:4 */
             shaderName = @"PixelViewer_YpCbCrA_1P";
             planeCount = 1;
             
@@ -242,8 +266,8 @@ static const GLubyte SquareIndices[] =
             pixelBufferParameters[0].bytesPerPixel = 3;
             
             break;
-        case kCVPixelFormatType_4444YpCbCrA8:
-        case kCVPixelFormatType_4444AYpCbCr8:
+        case kCVPixelFormatType_4444YpCbCrA8:   /* Component Y'CbCrA 8-bit 4:4:4:4, ordered Cb Y' Cr A */
+        case kCVPixelFormatType_4444AYpCbCr8:   /* Component Y'CbCrA 8-bit 4:4:4:4, ordered A Y' Cb Cr, full range alpha, video range Y'CbCr. */
             shaderName = @"PixelViewer_YpCbCrA_1P";
             planeCount = 1;
             
@@ -256,8 +280,8 @@ static const GLubyte SquareIndices[] =
 
             break;
             
-        case kCVPixelFormatType_24RGB:
-        case kCVPixelFormatType_24BGR:
+        case kCVPixelFormatType_24RGB:      /* 24 bit RGB */
+        case kCVPixelFormatType_24BGR:      /* 24 bit BGR */
             shaderName = @"PixelViewer_RGBA";
             pixelBufferParameters[0].dataType = GL_UNSIGNED_BYTE;
             pixelBufferParameters[0].pixelDataFormat = GL_RGB;
@@ -268,10 +292,10 @@ static const GLubyte SquareIndices[] =
             glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
             break;
             
-        case kCVPixelFormatType_32ARGB:
-        case kCVPixelFormatType_32BGRA:
-        case kCVPixelFormatType_32ABGR:
-        case kCVPixelFormatType_32RGBA:
+        case kCVPixelFormatType_32ARGB:     /* 32 bit ARGB */
+        case kCVPixelFormatType_32BGRA:     /* 32 bit BGRA */
+        case kCVPixelFormatType_32ABGR:     /* 32 bit ABGR */
+        case kCVPixelFormatType_32RGBA:     /* 32 bit RGBA */
             shaderName = @"PixelViewer_RGBA";
             pixelBufferParameters[0].dataType = GL_UNSIGNED_BYTE;
             pixelBufferParameters[0].pixelDataFormat = GL_RGBA;
@@ -301,7 +325,6 @@ static const GLubyte SquareIndices[] =
             glPixelStorei(GL_UNPACK_ALIGNMENT, 2);
             break;
         case kCVPixelFormatType_16LE565:      /* 16 bit BE RGB 565 */
-            //        case kCVPixelFormatType_16LE565:      /* 16 bit LE RGB 565 */
             shaderName = @"PixelViewer_RGBA";
             pixelBufferParameters[0].dataType = GL_UNSIGNED_SHORT_5_6_5;
             pixelBufferParameters[0].pixelDataFormat = GL_RGB;
@@ -382,30 +405,6 @@ static const GLubyte SquareIndices[] =
     
     if (CGSizeEqualToSize(self.sourceImageSize, CGSizeZero) != false)
         [self setupShadersForCropAndScaling];
-}
-
-- (id) initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    self.context = [[EAGLContext alloc] initWithAPI: kEAGLRenderingAPIOpenGLES3];
-    
-    if (self.context == nil)
-    {
-        self.context = [[EAGLContext alloc] initWithAPI: kEAGLRenderingAPIOpenGLES2];
-        NSLog(@"EEPixelViewer: Initialized with OpenGL ES 2.0");
-    }
-    else
-    {
-        NSLog(@"EEPixelViewer: Initialized with OpenGL ES 3.0");
-    }
-    return self;
-}
-
-- (id)initWithFrame:(CGRect)frame context:(EAGLContext *)context
-{
-	[EAGLContext setCurrentContext: context];
-	self = [super initWithFrame:frame context:context];
-	return self;
 }
 
 - (CGRect) calculateAspectFitFillRect
@@ -602,7 +601,7 @@ static const GLubyte SquareIndices[] =
     
     if (self.context.API == kEAGLRenderingAPIOpenGLES3)
     {
-        glPixelStorei(GL_UNPACK_ROW_LENGTH, plane->rowBytes / pixelBufferParameters[textureIndex].bytesPerPixel);
+        glPixelStorei(GL_UNPACK_ROW_LENGTH, (GLint) plane->rowBytes / pixelBufferParameters[textureIndex].bytesPerPixel);
     }
     else
     {
@@ -631,38 +630,6 @@ static const GLubyte SquareIndices[] =
         NSLog(@"glTexImage2D failed with error %d", errorCode);
 }
 
-- (void) displayPixelBufferPlanes:(EEPixelViewerPlane *)planes count:(int)planeCount withCompletion: (void (^)())completionBlock
-{
-    [self displayPixelBufferPlanes: planes count:planeCount];
-    
-    if (completionBlock != nil)
-        completionBlock();
-}
-
-- (void) displayPixelBufferPlanes: (EEPixelViewerPlane *) planes count: (int) planeCount
-{
-    [EAGLContext setCurrentContext: self.context];
-    [program use];
-    
-    if (_pixelFormat == kCVPixelFormatType_422YpCbCr8)
-    {
-        // Special case for an interleaved 4:2:2 YpCbCr case because we need to load the same texture twice in
-        // order to correctly parse this one:
-        [self loadTextureForPlane: &planes[0] forTextureIndex: 0];
-        planes[0].width = planes[0].width / 2;
-        [self loadTextureForPlane: &planes[0] forTextureIndex: 1];
-    }
-    else
-    {
-        for (int i = 0; i < planeCount; i++)
-        {
-            [self loadTextureForPlane: &planes[i] forTextureIndex: i];
-        }
-    }
-    
-    [self display];
-}
-
 - (void) drawRect:(CGRect)rect
 {
     // First make sure we don't try to run OGL code in the background -- it crashes the app:
@@ -670,15 +637,8 @@ static const GLubyte SquareIndices[] =
         return;
 
     [EAGLContext setCurrentContext:self.context];
-    
-//    self.layer.borderColor = [UIColor redColor].CGColor;
-//    self.layer.borderWidth = 3;
 	
 	[program use];
-	
-//	[self setupShadersForCropAndScaling];
-//	
-//    [self prepareTexturesFromCVImageBuffer];
     
     CGFloat red, green, blue, alpha;
     [self.backgroundColor getRed: &red green: &green blue: &blue alpha: &alpha];
@@ -761,6 +721,39 @@ static const GLubyte SquareIndices[] =
 	
 	glDeleteBuffers(1, &rectVertexBuffer);
 	glDeleteBuffers(1, &rectIndexBuffer);
+}
+
+#pragma mark - Public API
+- (void) displayPixelBufferPlanes:(EEPixelViewerPlane *)planes count:(int)planeCount withCompletion: (void (^)())completionBlock
+{
+    [self displayPixelBufferPlanes: planes count:planeCount];
+    
+    if (completionBlock != nil)
+        completionBlock();
+}
+
+- (void) displayPixelBufferPlanes: (EEPixelViewerPlane *) planes count: (int) planeCount
+{
+    [EAGLContext setCurrentContext: self.context];
+    [program use];
+    
+    if (_pixelFormat == kCVPixelFormatType_422YpCbCr8)
+    {
+        // Special case for an interleaved 4:2:2 YpCbCr case because we need to load the same texture twice in
+        // order to correctly parse this one:
+        [self loadTextureForPlane: &planes[0] forTextureIndex: 0];
+        planes[0].width = planes[0].width / 2;
+        [self loadTextureForPlane: &planes[0] forTextureIndex: 1];
+    }
+    else
+    {
+        for (int i = 0; i < planeCount; i++)
+        {
+            [self loadTextureForPlane: &planes[i] forTextureIndex: i];
+        }
+    }
+    
+    [self display];
 }
 
 @end

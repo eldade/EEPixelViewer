@@ -39,8 +39,8 @@ typedef struct EEPixelViewerPlane
 
 @property CGRect textureCropRect;
 @property (nonatomic) CGSize sourceImageSize;
-@property BOOL fpsIndicator;
-@property OSType pixelFormat;
+@property (nonatomic) BOOL fpsIndicator;
+@property (nonatomic) OSType pixelFormat;
 
 - (void) displayPixelBufferPlanes:(EEPixelViewerPlane *)planes count:(int)planeCount withCompletion: (void (^)())completionBlock;
 - (void) displayPixelBufferPlanes: (EEPixelViewerPlane *) planes count: (int) planeCount;
