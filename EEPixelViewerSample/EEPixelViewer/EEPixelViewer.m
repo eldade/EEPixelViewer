@@ -148,7 +148,7 @@ static const GLubyte SquareIndices[] =
     [super layoutSubviews];
     
     if (fpsLabel != nil)
-        fpsLabel.frame = CGRectMake(0, 0, self.bounds.size.width, 30);
+        fpsLabel.frame = CGRectMake(0, 0, self.bounds.size.width / 2, 30);
     
     [self deleteDrawable];
     [self bindDrawable];
@@ -197,7 +197,8 @@ static const GLubyte SquareIndices[] =
     
     switch(_pixelFormat)
     {
-        case kCVPixelFormatType_420YpCbCr8Planar:   /* Planar Component Y'CbCr 8-bit 4:2:0. */
+        case kCVPixelFormatType_420YpCbCr8Planar:           /* Planar Component Y'CbCr 8-bit 4:2:0. */
+        case kCVPixelFormatType_420YpCbCr8PlanarFullRange:  /* Planar Component Y'CbCr 8-bit 4:2:0, full range.*/
             shaderName = @"PixelViewer_YpCbCr_3P";
             planeCount = 3;
             
@@ -382,6 +383,9 @@ static const GLubyte SquareIndices[] =
             glUniform4i([program uniform:@"PermuteMap"], 0, 1, 2, 3);
         case kCVPixelFormatType_420YpCbCr8Planar:
             [self setupYpCbCrCoefficientsWithVideoRange];
+            break;
+        case kCVPixelFormatType_420YpCbCr8PlanarFullRange:
+            [self setupYpCbCrCoefficientsWithFullRange];
             break;
 
         case kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange:
@@ -663,6 +667,7 @@ static const GLubyte SquareIndices[] =
     {
         fpsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         fpsLabel.textColor = [UIColor whiteColor];
+        fpsLabel.backgroundColor = [UIColor blackColor];
         [self addSubview: fpsLabel];
         
         fpsLabel.text = @"";

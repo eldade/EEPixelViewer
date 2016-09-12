@@ -14,6 +14,7 @@
 		5137134B1D814C28006D63D5 /* PixelViewer_YpCbCrA_1P.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 5137134A1D814C28006D63D5 /* PixelViewer_YpCbCrA_1P.glsl */; };
 		513713641D823A15006D63D5 /* iPad Screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 513713631D823A15006D63D5 /* iPad Screen.png */; };
 		513713661D8388E6006D63D5 /* PixelViewer_RGB.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 513713651D8388E6006D63D5 /* PixelViewer_RGB.glsl */; };
+		513713681D852A1F006D63D5 /* iPhone5.png in Resources */ = {isa = PBXBuildFile; fileRef = 513713671D852A1F006D63D5 /* iPhone5.png */; };
 		5161A2F21D794B3B0012818A /* yuv.png in Resources */ = {isa = PBXBuildFile; fileRef = 5161A2F11D794B3B0012818A /* yuv.png */; };
 		516EB7CF1D764F4600CF8DF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 516EB7CE1D764F4600CF8DF5 /* main.m */; };
 		516EB7D21D764F4600CF8DF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 516EB7D11D764F4600CF8DF5 /* AppDelegate.m */; };
@@ -41,6 +42,7 @@
 		5137134A1D814C28006D63D5 /* PixelViewer_YpCbCrA_1P.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PixelViewer_YpCbCrA_1P.glsl; path = EEPixelViewerSample/EEPixelViewer/Shaders/PixelViewer_YpCbCrA_1P.glsl; sourceTree = SOURCE_ROOT; };
 		513713631D823A15006D63D5 /* iPad Screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad Screen.png"; path = "EEPixelViewerSample/Sample Images/iPad Screen.png"; sourceTree = SOURCE_ROOT; };
 		513713651D8388E6006D63D5 /* PixelViewer_RGB.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PixelViewer_RGB.glsl; path = EEPixelViewerSample/EEPixelViewer/Shaders/PixelViewer_RGB.glsl; sourceTree = SOURCE_ROOT; };
+		513713671D852A1F006D63D5 /* iPhone5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iPhone5.png; path = "Sample Images/iPhone5.png"; sourceTree = "<group>"; };
 		5161A2F11D794B3B0012818A /* yuv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yuv.png; path = "EEPixelViewerSample/Sample Images/yuv.png"; sourceTree = SOURCE_ROOT; };
 		516EB7CA1D764F4600CF8DF5 /* EEPixelViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EEPixelViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		516EB7CE1D764F4600CF8DF5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 		513713461D7F6651006D63D5 /* Sample Images */ = {
 			isa = PBXGroup;
 			children = (
+				513713671D852A1F006D63D5 /* iPhone5.png */,
 				5161A2F11D794B3B0012818A /* yuv.png */,
 				513713631D823A15006D63D5 /* iPad Screen.png */,
 				516EB7F31D76529400CF8DF5 /* iPhones.png */,
@@ -223,6 +226,7 @@
 				513713641D823A15006D63D5 /* iPad Screen.png in Resources */,
 				516EB7DA1D764F4600CF8DF5 /* Assets.xcassets in Resources */,
 				513713401D7D41A8006D63D5 /* SampleImages.plist in Resources */,
+				513713681D852A1F006D63D5 /* iPhone5.png in Resources */,
 				516EB7D81D764F4600CF8DF5 /* Main.storyboard in Resources */,
 				516EB7F41D76529400CF8DF5 /* iPhones.png in Resources */,
 				513713421D7F5A23006D63D5 /* PixelViewer_YpCbCr_2P.glsl in Resources */,

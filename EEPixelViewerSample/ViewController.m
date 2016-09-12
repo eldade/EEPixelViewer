@@ -273,6 +273,7 @@
             [imageConverter RGBA32to2PlanarYpCbCr: sourceBuffer pixelFormat: pixelFormat];
             break;
         case kCVPixelFormatType_420YpCbCr8Planar:
+        case kCVPixelFormatType_420YpCbCr8PlanarFullRange:
             [imageConverter RGBA32to3PlanarYpCbCr: sourceBuffer pixelFormat: pixelFormat];
             break;
         case kCVPixelFormatType_422YpCbCr8:

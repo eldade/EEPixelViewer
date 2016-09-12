@@ -45,6 +45,7 @@ vImage_YpCbCrPixelRange pixelRangeVideoClamped = { 16, 128, 235, 240, 235, 16, 2
     memset(planes, 0, sizeof(planes));
 }
 
+// Convert to kCVPixelFormatType_32ARGB, kCVPixelFormatType_32BGRA, kCVPixelFormatType_32ABGR, or kCVPixelFormatType_32RGBA:
 - (void) RGBA32to32bppRGBA: (vImage_Buffer) sourceBuffer pixelFormat: (int) pixelFormat
 {
     uint8_t *permuteMap;
@@ -74,6 +75,7 @@ vImage_YpCbCrPixelRange pixelRangeVideoClamped = { 16, 128, 235, 240, 235, 16, 2
     _planeCount = 1;
 }
 
+// Convert to kCVPixelFormatType_16LE555, kCVPixelFormatType_16LE5551 or kCVPixelFormatType_16LE565:
 - (void) RGBA32to16bpp: (vImage_Buffer) sourceBuffer pixelFormat: (int) pixelFormat
 {
     vImage_Buffer dest16bpp =  { malloc(sourceBuffer.width * sourceBuffer.height * 2), sourceBuffer.height, sourceBuffer.width, sourceBuffer.width * 2};
@@ -87,6 +89,7 @@ vImage_YpCbCrPixelRange pixelRangeVideoClamped = { 16, 128, 235, 240, 235, 16, 2
     _planeCount = 1;
 }
 
+// Convert to kCVPixelFormatType_24RGB or kCVPixelFormatType_24BGR:
 - (void) RGBA32to24bpp: (vImage_Buffer) sourceBuffer pixelFormat: (int) pixelFormat
 {
     vImage_Buffer dest24bpp =  { malloc(sourceBuffer.width * sourceBuffer.height * 3), sourceBuffer.height, sourceBuffer.width, sourceBuffer.width * 3};
@@ -103,10 +106,11 @@ vImage_YpCbCrPixelRange pixelRangeVideoClamped = { 16, 128, 235, 240, 235, 16, 2
     _planeCount = 1;
 }
 
+// Convert to kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange or kCVPixelFormatType_420YpCbCr8BiPlanarFullRange:
 - (void) RGBA32to2PlanarYpCbCr: (vImage_Buffer) sourceBuffer pixelFormat: (int) pixelFormat
 {
     vImage_Error err = kvImageNoError;
-    vImage_Flags flags = kvImageNoFlags;//kvImagePrintDiagnosticsToConsole;
+    vImage_Flags flags = kvImageNoFlags;
     vImage_YpCbCrPixelRange pixelRange;
     vImage_ARGBToYpCbCr outInfo;
     
@@ -116,8 +120,6 @@ vImage_YpCbCrPixelRange pixelRangeVideoClamped = { 16, 128, 235, 240, 235, 16, 2
         pixelRange = pixelRangeFull;
     
     err = vImageConvert_ARGBToYpCbCr_GenerateConversion(kvImage_ARGBToYpCbCrMatrix_ITU_R_601_4, &pixelRange, &outInfo, kvImageARGB8888, kvImage420Yp8_CbCr8, flags);
-    
-    vImage_YpCbCrToARGBMatrix matrix = *kvImage_YpCbCrToARGBMatrix_ITU_R_601_4;
     
     vImage_Buffer destYp = { malloc(sourceBuffer.width * sourceBuffer.height), sourceBuffer.height, sourceBuffer.width, sourceBuffer.width};
     vImage_Buffer destCbCr =  { malloc(sourceBuffer.width * sourceBuffer.height), sourceBuffer.height/2, sourceBuffer.width/2, sourceBuffer.width};
@@ -130,12 +132,18 @@ vImage_YpCbCrPixelRange pixelRangeVideoClamped = { 16, 128, 235, 240, 235, 16, 2
     _planeCount = 2;
 }
 
+// Convert to kCVPixelFormatType_420YpCbCr8Planar or kCVPixelFormatType_420YpCbCr8PlanarFullRange
 - (void) RGBA32to3PlanarYpCbCr: (vImage_Buffer) sourceBuffer pixelFormat: (int) pixelFormat
 {
     vImage_Error err = kvImageNoError;
-    vImage_Flags flags = kvImageNoFlags;//kvImagePrintDiagnosticsToConsole;
-    vImage_YpCbCrPixelRange pixelRange = pixelRangeVideoClamped;
+    vImage_Flags flags = kvImageNoFlags;
+    vImage_YpCbCrPixelRange pixelRange;
     vImage_ARGBToYpCbCr outInfo;
+    
+    if (pixelFormat == kCVPixelFormatType_420YpCbCr8Planar)
+        pixelRange = pixelRangeVideoClamped;
+    else
+        pixelRange = pixelRangeFull;
     
     err = vImageConvert_ARGBToYpCbCr_GenerateConversion(kvImage_ARGBToYpCbCrMatrix_ITU_R_601_4, &pixelRange, &outInfo, kvImageARGB8888, kvImage420Yp8_Cb8_Cr8, flags);
     
@@ -152,38 +160,38 @@ vImage_YpCbCrPixelRange pixelRangeVideoClamped = { 16, 128, 235, 240, 235, 16, 2
     _planeCount = 3;
 }
 
+// Convert to kCVPixelFormatType_444YpCbCr8:
 - (void) RGBA32toInterleaved444YpCbCr: (vImage_Buffer) sourceBuffer pixelFormat: (int) pixelFormat
 {
     vImage_Error err = kvImageNoError;
-    vImage_Flags flags = kvImageNoFlags;//kvImagePrintDiagnosticsToConsole;
+    vImage_Flags flags = kvImageNoFlags;
     vImage_YpCbCrPixelRange pixelRange = pixelRangeVideoClamped;
     vImage_ARGBToYpCbCr outInfo;
     
-    err = vImageConvert_ARGBToYpCbCr_GenerateConversion(kvImage_ARGBToYpCbCrMatrix_ITU_R_601_4, &pixelRange, &outInfo, kvImageARGB8888, kvImage422CbYpCrYp8, flags);
-    
-    //    vImageConvert_ARGB8888To422YpCbYpCr8
-    
-    vImage_YpCbCrToARGBMatrix matrix = *kvImage_YpCbCrToARGBMatrix_ITU_R_601_4;
-    
+    err = vImageConvert_ARGBToYpCbCr_GenerateConversion(kvImage_ARGBToYpCbCrMatrix_ITU_R_601_4, &pixelRange, &outInfo, kvImageARGB8888, kvImage444CrYpCb8, flags);
+        
     vImage_Buffer dest = { malloc(sourceBuffer.width * sourceBuffer.height * 3), sourceBuffer.height, sourceBuffer.width, sourceBuffer.width * 3};
     
     uint8_t permuteMap[] = { 3, 0, 1, 2}; // The conversion func expects ARGB so we this tells it to expect RGBA which is our one and only source format:
     vImageConvert_ARGB8888To444CrYpCb8(&sourceBuffer, &dest, &outInfo, permuteMap, flags);
     
-    // The above produces an image in a format that's completely undefined in the CV pixel format definitions (where the Cr channel precedes Yp),
-    // so we permute to a kCVPixelFormatType_444YpCbCr8 by flipping the first two channels. Note that the vImagePermuteChannels_RGB888 permute function
-    // specifies RGB but it doesn't matter since it's just flipping bytes.
+    // TO DO: still unclear on the actual byte ordering for kCVPixelFormatType_444YpCbCr8 aka 'v308'. Accelerate framework treats it as CrYpCb, but I haven't
+    // found any other evidence that that's the actual ordering for that format. I've configured the pixel viewer to expect this ordering for now. If that's
+    // wrong, the following PermuteChannels call correctly reverses the order to match the name of the format (YpCbCr).
     
-    //    [self YpCbCrToRGB: dest.data];
-    
-    uint8_t YpCb_permuteMap[] = {1, 2, 0 };
-    
-        vImagePermuteChannels_RGB888(&dest, &dest, YpCb_permuteMap, flags);
+//    // The above produces an image in a format that's completely undefined in the CV pixel format definitions (where the Cr channel precedes Yp),
+//    // so we permute to a kCVPixelFormatType_444YpCbCr8 by flipping the first two channels. Note that the vImagePermuteChannels_RGB888 permute function
+//    // specifies RGB but it doesn't matter since it's just flipping bytes.
+//    
+//    uint8_t YpCb_permuteMap[] = {1, 2, 0 };
+//    
+//    vImagePermuteChannels_RGB888(&dest, &dest, YpCb_permuteMap, flags);
     
     planes[0] = dest;
     _planeCount = 1;
 }
 
+// Convert to kCVPixelFormatType_422YpCbCr8
 - (void) RGBA32toInterleaved422YpCbCr: (vImage_Buffer) sourceBuffer pixelFormat: (int) pixelFormat
 {
     vImage_Error err = kvImageNoError;
@@ -193,30 +201,16 @@ vImage_YpCbCrPixelRange pixelRangeVideoClamped = { 16, 128, 235, 240, 235, 16, 2
     
     err = vImageConvert_ARGBToYpCbCr_GenerateConversion(kvImage_ARGBToYpCbCrMatrix_ITU_R_601_4, &pixelRange, &outInfo, kvImageARGB8888, kvImage422CbYpCrYp8, flags);
     
-    //    vImageConvert_ARGB8888To422YpCbYpCr8
-    
-    vImage_YpCbCrToARGBMatrix matrix = *kvImage_YpCbCrToARGBMatrix_ITU_R_601_4;
-    
     vImage_Buffer dest = { malloc(sourceBuffer.width * sourceBuffer.height * 2), sourceBuffer.height, sourceBuffer.width, sourceBuffer.width * 2};
     
     uint8_t permuteMap[] = { 3, 0, 1, 2}; // The conversion func expects ARGB so we this tells it to expect RGBA which is our one and only source format:
     vImageConvert_ARGB8888To422CbYpCrYp8(&sourceBuffer, &dest, &outInfo, permuteMap, flags);
     
-    // The above produces an image in a format that's completely undefined in the CV pixel format definitions (where the Cr channel precedes Yp),
-    // so we permute to a kCVPixelFormatType_444YpCbCr8 by flipping the first two channels. Note that the vImagePermuteChannels_RGB888 permute function
-    // specifies RGB but it doesn't matter since it's just flipping bytes.
-    
-//    [self YpCbCrToRGB: dest.data];
-    
-    uint8_t YpCb_permuteMap[] = {1, 2, 0 };
-    
-//    vImagePermuteChannels_RGB888(&dest, &dest, YpCb_permuteMap, flags);
-    
     planes[0] = dest;
     _planeCount = 1;
 }
 
-//    kCVPixelFormatType_4444YpCbCrA8
+// Convert to kCVPixelFormatType_4444YpCbCrA8
 - (void) RGBA32toInterleaved444YpCbCrA8: (vImage_Buffer) sourceBuffer pixelFormat: (int) pixelFormat
 {
     vImage_Error err = kvImageNoError;
@@ -226,30 +220,16 @@ vImage_YpCbCrPixelRange pixelRangeVideoClamped = { 16, 128, 235, 240, 235, 16, 2
     
     err = vImageConvert_ARGBToYpCbCr_GenerateConversion(kvImage_ARGBToYpCbCrMatrix_ITU_R_601_4, &pixelRange, &outInfo, kvImageARGB8888, kvImage444CbYpCrA8, flags);
     
-    //    vImageConvert_ARGB8888To422YpCbYpCr8
-    
-    vImage_YpCbCrToARGBMatrix matrix = *kvImage_YpCbCrToARGBMatrix_ITU_R_601_4;
-    
     vImage_Buffer dest = { malloc(sourceBuffer.width * sourceBuffer.height * 4), sourceBuffer.height, sourceBuffer.width, sourceBuffer.width * 4};
     
     uint8_t permuteMap[] = { 3, 0, 1, 2}; // The conversion func expects ARGB so we this tells it to expect RGBA which is our one and only source format:
     vImageConvert_ARGB8888To444CbYpCrA8(&sourceBuffer, &dest, &outInfo, permuteMap, flags);
     
-    // The above produces an image in a format that's completely undefined in the CV pixel format definitions (where the Cr channel precedes Yp),
-    // so we permute to a kCVPixelFormatType_444YpCbCr8 by flipping the first two channels. Note that the vImagePermuteChannels_RGB888 permute function
-    // specifies RGB but it doesn't matter since it's just flipping bytes.
-    
-    //    [self YpCbCrToRGB: dest.data];
-    
-    uint8_t YpCb_permuteMap[] = {1, 0, 2, 3 };
-    
-//    vImagePermuteChannels_ARGB8888(&dest, &dest, YpCb_permuteMap, flags);
-    
     planes[0] = dest;
     _planeCount = 1;
 }
 
-//    kCVPixelFormatType_4444AYpCbCr8
+// Convert to kCVPixelFormatType_4444AYpCbCr8
 - (void) RGBA32toInterleaved444AYpCbCr8: (vImage_Buffer) sourceBuffer pixelFormat: (int) pixelFormat
 {
     vImage_Error err = kvImageNoError;
@@ -259,24 +239,10 @@ vImage_YpCbCrPixelRange pixelRangeVideoClamped = { 16, 128, 235, 240, 235, 16, 2
     
     err = vImageConvert_ARGBToYpCbCr_GenerateConversion(kvImage_ARGBToYpCbCrMatrix_ITU_R_601_4, &pixelRange, &outInfo, kvImageARGB8888, kvImage444AYpCbCr8, flags);
     
-    //    vImageConvert_ARGB8888To422YpCbYpCr8
-    
-    vImage_YpCbCrToARGBMatrix matrix = *kvImage_YpCbCrToARGBMatrix_ITU_R_601_4;
-    
     vImage_Buffer dest = { malloc(sourceBuffer.width * sourceBuffer.height * 4), sourceBuffer.height, sourceBuffer.width, sourceBuffer.width * 4};
     
     uint8_t permuteMap[] = { 3, 0, 1, 2}; // The conversion func expects ARGB so we this tells it to expect RGBA which is our one and only source format:
     vImageConvert_ARGB8888To444AYpCbCr8(&sourceBuffer, &dest, &outInfo, permuteMap, flags);
-    
-    // The above produces an image in a format that's completely undefined in the CV pixel format definitions (where the Cr channel precedes Yp),
-    // so we permute to a kCVPixelFormatType_444YpCbCr8 by flipping the first two channels. Note that the vImagePermuteChannels_RGB888 permute function
-    // specifies RGB but it doesn't matter since it's just flipping bytes.
-    
-    //    [self YpCbCrToRGB: dest.data];
-    
-    uint8_t YpCb_permuteMap[] = {1, 0, 2, 3 };
-    
-    //    vImagePermuteChannels_ARGB8888(&dest, &dest, YpCb_permuteMap, flags);
     
     _planeCount = 1;
     planes[0] = dest;
