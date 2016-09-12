@@ -380,7 +380,9 @@ static const GLubyte SquareIndices[] =
             break;
             
         case kCVPixelFormatType_444YpCbCr8:
-            glUniform4i([program uniform:@"PermuteMap"], 0, 1, 2, 3);
+            // The shader is configured for YpCbCr (A) ordering, but this format APPEARS to be
+            // CbYpCr, so we use the PermuteMap to flip the bytes in the GPU:
+            glUniform4i([program uniform:@"PermuteMap"], 1, 0, 2, 3);
         case kCVPixelFormatType_420YpCbCr8Planar:
             [self setupYpCbCrCoefficientsWithVideoRange];
             break;
