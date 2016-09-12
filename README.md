@@ -29,6 +29,8 @@ An iPhone 5, using a test image based on the native resolution for that device (
 
 ##Supported Pixel Formats
 
+**NOTE: Excellent performance means 60FPS when testing a video at the device's native resolution. Formats marked excellent mean that the oldest devices tested (iPhone 5 and iPad (4th generation)) delivered 60 fps.**
+
 | Pixel Format                                   | Supported    | BPP | Planes |Performance|
 | ---------------------------------------------- |:------------:|:---:|:------:|:---------:|
 | kCVPixelFormatType_420YpCbCr8Planar            | ✅           |  16  |  3| Excellent |
