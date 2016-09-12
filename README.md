@@ -32,6 +32,7 @@ An iPhone 5, using a test image based on the native resolution for that device (
 | Pixel Format                                   | Supported    | BPP | Planes |
 | ---------------------------------------------- |:------------:|:---:|:------:|
 | kCVPixelFormatType_420YpCbCr8Planar            | ✅           |  16  |  3|
+| kCVPixelFormatType_420YpCbCr8PlanarFullRange            | ✅           |  16  |  3|
 | kCVPixelFormatType_422YpCbCr8            | ✅           |  16  | 1|
 | kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange            | ✅           |  16  | 2|
 | kCVPixelFormatType_420YpCbCr8BiPlanarFullRange            | ✅           |  16  |   2|
