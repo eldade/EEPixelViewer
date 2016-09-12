@@ -29,22 +29,22 @@ An iPhone 5, using a test image based on the native resolution for that device (
 
 ##Supported Pixel Formats
 
-| Pixel Format                                   | Supported    | BPP | Planes |
-| ---------------------------------------------- |:------------:|:---:|:------:|
-| kCVPixelFormatType_420YpCbCr8Planar            | ✅           |  16  |  3|
-| kCVPixelFormatType_420YpCbCr8PlanarFullRange            | ✅           |  16  |  3|
-| kCVPixelFormatType_422YpCbCr8            | ✅           |  16  | 1|
-| kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange            | ✅           |  16  | 2|
-| kCVPixelFormatType_420YpCbCr8BiPlanarFullRange            | ✅           |  16  |   2|
-| kCVPixelFormatType_444YpCbCr8            | ✅           |  24  |  1|
-| kCVPixelFormatType_4444YpCbCrA8            | ✅           |  32  |  1|
-| kCVPixelFormatType_4444AYpCbCr8            | ✅           |  32  |  1|
-| kCVPixelFormatType_24RGB            | ✅           |  24|  1|
-| kCVPixelFormatType_24BGR            | ✅           |  24|  1|
-| kCVPixelFormatType_32ARGB            | ✅           |  32 |  1|
-| kCVPixelFormatType_32BGRA            | ✅           |  32 |  1|
-| kCVPixelFormatType_32ABGR            | ✅           |  32 |  1|
-| kCVPixelFormatType_32RGBA            | ✅           |  32|1|
-| kCVPixelFormatType_16LE555            | ✅           |  16  |  1|
-| kCVPixelFormatType_16LE5551            | ✅           |  16  | 1|
-| kCVPixelFormatType_16LE565            | ✅           |  16  |  1 |
+| Pixel Format                                   | Supported    | BPP | Planes |Performance|
+| ---------------------------------------------- |:------------:|:---:|:------:|:---------:|
+| kCVPixelFormatType_420YpCbCr8Planar            | ✅           |  16  |  3| Excellent |
+| kCVPixelFormatType_420YpCbCr8PlanarFullRange            | ✅           |  16  |  3| Excellent |
+| kCVPixelFormatType_422YpCbCr8            | ✅           |  16  | 1| Excellent |
+| kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange            | ✅           |  16  | 2| Excellent |
+| kCVPixelFormatType_420YpCbCr8BiPlanarFullRange            | ✅           |  16  |   2| Excellent |
+| kCVPixelFormatType_444YpCbCr8            | ✅           |  24  |  1| Excellent on recent devices, fair on older ones |
+| kCVPixelFormatType_4444YpCbCrA8            | ✅           |  32  |  1| Excellent |
+| kCVPixelFormatType_4444AYpCbCr8            | ✅           |  32  |  1| Excellent |
+| kCVPixelFormatType_24RGB            | ✅           |  24|  1| Excellent on recent devices, fair on older ones |
+| kCVPixelFormatType_24BGR            | ✅           |  24|  1| Excellent on recent devices, fair on older ones |
+| kCVPixelFormatType_32ARGB            | ✅           |  32 |  1| Excellent |
+| kCVPixelFormatType_32BGRA            | ✅           |  32 |  1| Excellent |
+| kCVPixelFormatType_32ABGR            | ✅           |  32 |  1| Excellent |
+| kCVPixelFormatType_32RGBA            | ✅           |  32|1| Excellent |
+| kCVPixelFormatType_16LE555            | ✅           |  16  |  1| Excellent |
+| kCVPixelFormatType_16LE5551            | ✅           |  16  | 1| Excellent |
+| kCVPixelFormatType_16LE565            | ✅           |  16  |  1 | Excellent |
