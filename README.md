@@ -23,7 +23,7 @@ Note that if you're displaying a video or animation, you will need to make the c
 
 ## Performance
 
-Specific performance figures obviously depend on the image resolution, the pixel format, and the device's hardware, but generally speaking you can expect decent performance from even relatively outdated iOS devices such as the original iPad Air. On the iPad Air, a video playing in full Retina resolution (2048 by 1536) will usually achieve 60 FPS, consuming about 50-60% CPU (about half of one of the CPU cores). Newer devices pretty much all achieve 60 fps for such resolutions.
+Specific performance figures obviously depend on the image resolution, the pixel format, and the device's hardware, but generally speaking you can expect decent performance from even outdated iOS devices such as the 4th generation iPad. On the iPad Air, a video playing in full Retina resolution (2048 by 1536) will usually achieve 60 FPS, consuming about 50-60% CPU (about half of one of the CPU cores). Newer devices pretty much all achieve 60 fps for such resolutions.
 
 An iPhone 5, using a test image based on the native resolution for that device (1136x640), achieves 60 fps on all supported image formats except for 24-bpp ones such as 24RGB and the 24-bit 444YpCbCr formats which achieve around 30 fps.
 
@@ -31,22 +31,22 @@ An iPhone 5, using a test image based on the native resolution for that device (
 
 **NOTE: Excellent performance means 60FPS when testing a video at the device's native resolution. Formats marked excellent mean that the oldest devices tested (iPhone 5 and iPad (4th generation)) delivered 60 fps.**
 
-| Pixel Format                                   | Supported    | BPP | Planes |Performance|
-| ---------------------------------------------- |:------------:|:---:|:------:|:---------:|
-| kCVPixelFormatType_420YpCbCr8Planar            | ✅           |  16  |  3| Excellent |
-| kCVPixelFormatType_420YpCbCr8PlanarFullRange            | ✅           |  16  |  3| Excellent |
-| kCVPixelFormatType_422YpCbCr8            | ✅           |  16  | 1| Excellent |
-| kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange            | ✅           |  16  | 2| Excellent |
-| kCVPixelFormatType_420YpCbCr8BiPlanarFullRange            | ✅           |  16  |   2| Excellent |
-| kCVPixelFormatType_444YpCbCr8            | ✅           |  24  |  1| Excellent on recent devices, fair on older ones |
-| kCVPixelFormatType_4444YpCbCrA8            | ✅           |  32  |  1| Excellent |
-| kCVPixelFormatType_4444AYpCbCr8            | ✅           |  32  |  1| Excellent |
-| kCVPixelFormatType_24RGB            | ✅           |  24|  1| Excellent on recent devices, fair on older ones |
-| kCVPixelFormatType_24BGR            | ✅           |  24|  1| Excellent on recent devices, fair on older ones |
-| kCVPixelFormatType_32ARGB            | ✅           |  32 |  1| Excellent |
-| kCVPixelFormatType_32BGRA            | ✅           |  32 |  1| Excellent |
-| kCVPixelFormatType_32ABGR            | ✅           |  32 |  1| Excellent |
-| kCVPixelFormatType_32RGBA            | ✅           |  32|1| Excellent |
-| kCVPixelFormatType_16LE555            | ✅           |  16  |  1| Excellent |
-| kCVPixelFormatType_16LE5551            | ✅           |  16  | 1| Excellent |
-| kCVPixelFormatType_16LE565            | ✅           |  16  |  1 | Excellent |
+| Pixel Format | Supported    | BPP | Planes |Performance|
+| :----------- |:------------:|:---:|:------:|:---------:|
+| kCVPixelFormatType_420YpCbCr8Planar|✅|16|3|Excellent|
+| kCVPixelFormatType_420YpCbCr8PlanarFullRange|✅|16|3|Excellent|
+| kCVPixelFormatType_422YpCbCr8|✅|16|1|Excellent|
+| kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange|✅|16|2|Excellent|
+| kCVPixelFormatType_420YpCbCr8BiPlanarFullRange|✅|16|2|Excellent|
+| kCVPixelFormatType_444YpCbCr8|✅|24|1|Excellent on recent devices, fair on older ones |
+| kCVPixelFormatType_4444YpCbCrA8|✅|32|1|Excellent|
+| kCVPixelFormatType_4444AYpCbCr8|✅|32|1|Excellent|
+| kCVPixelFormatType_24RGB|✅|24|1|Excellent on recent devices, fair on older ones |
+| kCVPixelFormatType_24BGR|✅|24|1|Excellent on recent devices, fair on older ones |
+| kCVPixelFormatType_32ARGB|✅|32|1|Excellent |
+| kCVPixelFormatType_32BGRA|✅|32|1|Excellent |
+| kCVPixelFormatType_32ABGR|✅|32|1|Excellent |
+| kCVPixelFormatType_32RGBA|✅|32|1|Excellent |
+| kCVPixelFormatType_16LE555|✅|16|1|Excellent |
+| kCVPixelFormatType_16LE5551|✅|16|1|Excellent |
+| kCVPixelFormatType_16LE565|✅|16|1|Excellent |
