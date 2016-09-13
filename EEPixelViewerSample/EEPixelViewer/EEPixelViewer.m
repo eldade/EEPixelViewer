@@ -31,6 +31,8 @@
 
 #import "OGLProgramManager.h"
 
+#import <Accelerate/Accelerate.h>
+
 #pragma mark - Internal Definitions
 
 typedef struct {
@@ -96,6 +98,10 @@ static const GLubyte SquareIndices[] =
     }  pixelBufferParameters[4];
     
     UIViewContentMode pixelViewerContentMode;
+    
+    // This is a special optimization for OpenGL ES 2.0 devices that somewhat improves performance
+    // for 24bpp formats such as 24RGB, 24BGR, and 444YpCbCr.
+    BOOL treat24bppAs3Planes;
 }
 @end
 
@@ -112,10 +118,12 @@ static const GLubyte SquareIndices[] =
     {
         self.context = [[EAGLContext alloc] initWithAPI: kEAGLRenderingAPIOpenGLES2];
         NSLog(@"EEPixelViewer: Initialized with OpenGL ES 2.0");
+        treat24bppAs3Planes = YES;
     }
     else
     {
         NSLog(@"EEPixelViewer: Initialized with OpenGL ES 3.0");
+        treat24bppAs3Planes = NO;
     }
     return self;
 }
@@ -256,16 +264,45 @@ static const GLubyte SquareIndices[] =
             break;
             
         case kCVPixelFormatType_444YpCbCr8:     /* Component Y'CbCr 8-bit 4:4:4 */
-            shaderName = @"PixelViewer_YpCbCrA_1P";
-            planeCount = 1;
-            
-            glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
-            
-            pixelBufferParameters[0].dataType = GL_UNSIGNED_BYTE;
-            pixelBufferParameters[0].pixelDataFormat = GL_RGB;
-            pixelBufferParameters[0].internalFormat = GL_RGB8;
-            pixelBufferParameters[0].bytesPerPixel = 3;
-            
+            if (treat24bppAs3Planes == YES)
+            {
+                // For kCVPixelFormatType_444YpCbCr8, we describe it as a 3-planar format because
+                // that appears to be a quicker way to load the textures. Rather than load a single 24-bpp
+                // buffer, we use the Accelerate framework to break it down into three separate 8-bpp planes,
+                // which we then proceed to load as three distinct textures. It ends up being much faster
+                // on older devices.
+                shaderName = @"PixelViewer_YpCbCr_3P";
+                pixelBufferParameters[0].dataType = GL_UNSIGNED_BYTE;
+                pixelBufferParameters[0].pixelDataFormat = GL_LUMINANCE;
+                pixelBufferParameters[0].internalFormat = GL_LUMINANCE;
+                pixelBufferParameters[0].bytesPerPixel = 1;
+                
+                pixelBufferParameters[1].dataType = GL_UNSIGNED_BYTE;
+                pixelBufferParameters[1].pixelDataFormat = GL_LUMINANCE;
+                pixelBufferParameters[1].internalFormat = GL_LUMINANCE;
+                pixelBufferParameters[1].bytesPerPixel = 1;
+                
+                pixelBufferParameters[2].dataType = GL_UNSIGNED_BYTE;
+                pixelBufferParameters[2].pixelDataFormat = GL_LUMINANCE;
+                pixelBufferParameters[2].internalFormat = GL_LUMINANCE;
+                pixelBufferParameters[2].bytesPerPixel = 1;
+                
+                planeCount = 3;
+                glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+            }
+            else
+            {
+                shaderName = @"PixelViewer_YpCbCrA_1P";
+                planeCount = 1;
+                
+                glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+                
+                pixelBufferParameters[0].dataType = GL_UNSIGNED_BYTE;
+                pixelBufferParameters[0].pixelDataFormat = GL_RGB;
+                pixelBufferParameters[0].internalFormat = GL_RGB8;
+                pixelBufferParameters[0].bytesPerPixel = 3;
+            }
+    
             break;
         case kCVPixelFormatType_4444YpCbCrA8:   /* Component Y'CbCrA 8-bit 4:4:4:4, ordered Cb Y' Cr A */
         case kCVPixelFormatType_4444AYpCbCr8:   /* Component Y'CbCrA 8-bit 4:4:4:4, ordered A Y' Cb Cr, full range alpha, video range Y'CbCr. */
@@ -283,14 +320,44 @@ static const GLubyte SquareIndices[] =
             
         case kCVPixelFormatType_24RGB:      /* 24 bit RGB */
         case kCVPixelFormatType_24BGR:      /* 24 bit BGR */
-            shaderName = @"PixelViewer_RGBA";
-            pixelBufferParameters[0].dataType = GL_UNSIGNED_BYTE;
-            pixelBufferParameters[0].pixelDataFormat = GL_RGB;
-            pixelBufferParameters[0].internalFormat = GL_RGB8;
-            pixelBufferParameters[0].bytesPerPixel = 3;
-
-            planeCount = 1;
-            glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+            if (treat24bppAs3Planes == YES)
+            {
+                // We treat 24-bpp RGB formats as 3-planar formats because that appears to be a
+                // quicker way to load the textures. Rather than load a single 24-bpp buffer, we use
+                // the Accelerate framework to break it down into three separate 8-bpp planes,
+                // which we then proceed to load as three distinct textures. It ends up being much faster
+                // on older devices.
+                
+                shaderName = @"PixelViewer_RGB_3P";
+                pixelBufferParameters[0].dataType = GL_UNSIGNED_BYTE;
+                pixelBufferParameters[0].pixelDataFormat = GL_LUMINANCE;
+                pixelBufferParameters[0].internalFormat = GL_LUMINANCE;
+                pixelBufferParameters[0].bytesPerPixel = 1;
+                
+                pixelBufferParameters[1].dataType = GL_UNSIGNED_BYTE;
+                pixelBufferParameters[1].pixelDataFormat = GL_LUMINANCE;
+                pixelBufferParameters[1].internalFormat = GL_LUMINANCE;
+                pixelBufferParameters[1].bytesPerPixel = 1;
+                
+                pixelBufferParameters[2].dataType = GL_UNSIGNED_BYTE;
+                pixelBufferParameters[2].pixelDataFormat = GL_LUMINANCE;
+                pixelBufferParameters[2].internalFormat = GL_LUMINANCE;
+                pixelBufferParameters[2].bytesPerPixel = 1;
+                
+                planeCount = 3;
+                glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+            }
+            else
+            {
+                shaderName = @"PixelViewer_RGBA";
+                pixelBufferParameters[0].dataType = GL_UNSIGNED_BYTE;
+                pixelBufferParameters[0].pixelDataFormat = GL_RGB;
+                pixelBufferParameters[0].internalFormat = GL_RGB8;
+                pixelBufferParameters[0].bytesPerPixel = 3;
+                
+                planeCount = 1;
+                glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+            }
             break;
             
         case kCVPixelFormatType_32ARGB:     /* 32 bit ARGB */
@@ -382,7 +449,7 @@ static const GLubyte SquareIndices[] =
         case kCVPixelFormatType_444YpCbCr8:
             // The shader is configured for YpCbCr (A) ordering, but this format APPEARS to be
             // CbYpCr, so we use the PermuteMap to flip the bytes in the GPU:
-            glUniform4i([program uniform:@"PermuteMap"], 1, 0, 2, 3);
+            glUniform4i([program uniform:@"PermuteMap"], 1, 2, 0, 3);
         case kCVPixelFormatType_420YpCbCr8Planar:
             [self setupYpCbCrCoefficientsWithVideoRange];
             break;
@@ -405,6 +472,9 @@ static const GLubyte SquareIndices[] =
     }
     
     glEnableVertexAttribArray([program attribute: @"Position"]);
+    
+    glUniform4f([program uniform:@"VertexPositionScale"], 1.0, 1.0, 1.0, 1.0);
+    glUniform4f([program uniform:@"VertexPositionShift"], 0.0, 0.0, 0.0, 0.0);
     
     for (int texture = 0 ; texture < planeCount; texture++)
         glUniform1i([program uniform: [NSString stringWithFormat:@"texture%d", texture + 1]], texture);
@@ -650,11 +720,7 @@ static const GLubyte SquareIndices[] =
     [self.backgroundColor getRed: &red green: &green blue: &blue alpha: &alpha];
     glClearColor(red, green, blue, alpha);
     glClear(GL_COLOR_BUFFER_BIT);
-	
-	glUniform4f([program uniform:@"VertexPositionScale"], 1.0, 1.0, 1.0, 1.0);
 		
-	glUniform4f([program uniform:@"VertexPositionShift"], 0.0, 0.0, 0.0, 0.0);
-	
 	glViewport(0, 0, (GLsizei) self.drawableWidth, (GLsizei) self.drawableHeight);
 	
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, 0);
@@ -688,13 +754,13 @@ static const GLubyte SquareIndices[] =
     if (totalFrames >= maxFrames)
     {
         totalTime -= (totalTime / totalFrames);
-        totalFrames --;
     }
+    else
+        totalFrames++;
     
-    totalFrames++;
     totalTime += latestInterval;
     
-    [fpsLabel performSelectorOnMainThread: @selector(setText:) withObject:[NSString stringWithFormat: @"Average FPS:%.0f", (float) totalFrames / (float) totalTime] waitUntilDone:NO];
+    [fpsLabel performSelectorOnMainThread: @selector(setText:) withObject:[NSString stringWithFormat: @"Resolution: %dx%d. Average FPS:%.0f", (int) _sourceImageSize.width, (int) _sourceImageSize.height, (float) totalFrames / (float) totalTime] waitUntilDone:NO];
     lastTimestamp = [NSDate date];
 }
 
@@ -722,10 +788,9 @@ static const GLubyte SquareIndices[] =
 
 - (void) dealloc
 {
-
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 	[EAGLContext setCurrentContext: self.context];
 	
+    glDeleteTextures(4, textures);
 	glDeleteBuffers(1, &rectVertexBuffer);
 	glDeleteBuffers(1, &rectIndexBuffer);
 }
@@ -739,25 +804,73 @@ static const GLubyte SquareIndices[] =
         completionBlock();
 }
 
+// load24bppAsPlanarTextures: This is an optimization for ES 2.0 where we convert any 24bpp formats
+// to 3 8bpp planes which are then loaded to the GPU. The conversion is done efficiently on multiple
+// threads using Accelerate.framework. On devices that support OpenGL ES 3.0 we just load the 24bpp
+// textures directly, which seems to be an overall better compromise.
+- (void) load24bppAsPlanarTextures: (EEPixelViewerPlane *) planes count: (int) planeCount
+{
+    vImage_Buffer destPlanarBuffers[3] = { malloc(_sourceImageSize.width * _sourceImageSize.height), _sourceImageSize.height, _sourceImageSize.width, _sourceImageSize.width,
+        
+        malloc(_sourceImageSize.width * _sourceImageSize.height), _sourceImageSize.height, _sourceImageSize.width, _sourceImageSize.width,
+        
+        malloc(_sourceImageSize.width * _sourceImageSize.height), _sourceImageSize.height, _sourceImageSize.width, _sourceImageSize.width};
+    
+    vImage_Buffer sourceRGBBuffer = { planes[0].data, planes[0].height, planes[0].width, planes[0].rowBytes };
+
+    switch (_pixelFormat)
+    {
+        case kCVPixelFormatType_24RGB:
+            vImageConvert_RGB888toPlanar8(&sourceRGBBuffer, &destPlanarBuffers[0], &destPlanarBuffers[1], &destPlanarBuffers[2], kvImageNoFlags);
+            break;
+        case kCVPixelFormatType_444YpCbCr8:
+            vImageConvert_RGB888toPlanar8(&sourceRGBBuffer, &destPlanarBuffers[2], &destPlanarBuffers[0], &destPlanarBuffers[1], kvImageNoFlags);
+            break;
+        case kCVPixelFormatType_24BGR:
+            vImageConvert_RGB888toPlanar8(&sourceRGBBuffer, &destPlanarBuffers[2], &destPlanarBuffers[1], &destPlanarBuffers[0], kvImageNoFlags);
+            break;
+    }
+    
+    for (int planeIndex = 0 ; planeIndex < 3; planeIndex ++)
+    {
+        EEPixelViewerPlane pvPlane = { destPlanarBuffers[planeIndex].data, destPlanarBuffers[planeIndex].height, destPlanarBuffers[planeIndex].width, destPlanarBuffers[planeIndex].rowBytes };
+        [self loadTextureForPlane: &pvPlane forTextureIndex: planeIndex];
+        free (destPlanarBuffers[planeIndex].data);
+    }
+}
+
 - (void) displayPixelBufferPlanes: (EEPixelViewerPlane *) planes count: (int) planeCount
 {
     [EAGLContext setCurrentContext: self.context];
     [program use];
     
-    if (_pixelFormat == kCVPixelFormatType_422YpCbCr8)
+    switch (_pixelFormat)
     {
-        // Special case for an interleaved 4:2:2 YpCbCr case because we need to load the same texture twice in
-        // order to correctly parse this one:
-        [self loadTextureForPlane: &planes[0] forTextureIndex: 0];
-        planes[0].width = planes[0].width / 2;
-        [self loadTextureForPlane: &planes[0] forTextureIndex: 1];
-    }
-    else
-    {
-        for (int i = 0; i < planeCount; i++)
+        case kCVPixelFormatType_422YpCbCr8:
+            // Special case for an interleaved 4:2:2 YpCbCr case because we need to load the same texture twice in
+            // order to correctly parse this one:
+            [self loadTextureForPlane: &planes[0] forTextureIndex: 0];
+            planes[0].width = planes[0].width / 2;
+            [self loadTextureForPlane: &planes[0] forTextureIndex: 1];
+            break;
+        case kCVPixelFormatType_444YpCbCr8:
+        case kCVPixelFormatType_24BGR:
+        case kCVPixelFormatType_24RGB:
         {
-            [self loadTextureForPlane: &planes[i] forTextureIndex: i];
+            if (treat24bppAs3Planes == YES)
+            {
+                [self load24bppAsPlanarTextures: (EEPixelViewerPlane *) planes count: (int) planeCount];
+                break;
+            }
+            // NOTE: If we're treating 24-bpp formats as usual, just flow on to the default case.
+            // These switch cases MUST be kept last before the default block!
         }
+        default:
+            for (int i = 0; i < planeCount; i++)
+            {
+                [self loadTextureForPlane: &planes[i] forTextureIndex: i];
+            }
+            break;
     }
     
     [self display];

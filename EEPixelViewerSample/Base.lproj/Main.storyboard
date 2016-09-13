@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -28,9 +27,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="eV8-oU-WMZ" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="HAc-S9-Eig"/>
+                            <constraint firstItem="eV8-oU-WMZ" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.3" id="HAc-S9-Eig"/>
                             <constraint firstItem="eV8-oU-WMZ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ITL-Pb-Epz"/>
-                            <constraint firstItem="eNQ-Dj-CdF" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="K5X-Zt-Sh4"/>
+                            <constraint firstItem="eNQ-Dj-CdF" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.7" id="K5X-Zt-Sh4"/>
                             <constraint firstItem="eV8-oU-WMZ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Ohj-BT-ysB"/>
                             <constraint firstItem="eNQ-Dj-CdF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PnY-K7-TIz"/>
                             <constraint firstItem="eNQ-Dj-CdF" firstAttribute="top" secondItem="eV8-oU-WMZ" secondAttribute="bottom" id="TMy-eB-0sX"/>

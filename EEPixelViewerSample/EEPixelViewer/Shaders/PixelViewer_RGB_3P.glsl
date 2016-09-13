@@ -24,13 +24,6 @@
 //    WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 //    ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-// Two-plane YpCbCr shader: Supports all two-plane YpCbCr pixel formats. YpCbCr to RGB conversion
-// is done using a coefficient matrix that's uploaded to the GPU via a uniform matrix. This shader also
-// supports a PermuteMap to support various permutations on channel ordering in the source texture.
-
-// texture1 contains Yp values, while texture2 contains intervleaved CbCr values (ordering can be altered via PermuteMap).
-
-
 precision highp float;
 
 varying highp vec2 TexCoordOut;
@@ -38,22 +31,18 @@ uniform sampler2D texture1;
 uniform sampler2D texture2;
 uniform sampler2D texture3;
 
-uniform mat4 coefficientMatrix;
-
-uniform vec4 YpCbCrOffsets;
-
 uniform ivec4 PermuteMap;
 
 void main()
 {
-    vec4 YpCbCrToConvert;
+//    highp vec4 pixOriginal = texture2D(texture1, TexCoordOut);
     
-    YpCbCrToConvert[0] = texture2D(texture1, TexCoordOut)[PermuteMap[0]];
-    YpCbCrToConvert[1] = texture2D(texture2, TexCoordOut)[PermuteMap[1]];
-    YpCbCrToConvert[2] = texture2D(texture2, TexCoordOut)[PermuteMap[2]];
-    YpCbCrToConvert[3] = 1.0;
+    highp vec4 pixPermuted;
     
-    YpCbCrToConvert -= YpCbCrOffsets;
+    pixPermuted.r = texture2D(texture1, TexCoordOut).r;
+    pixPermuted.g = texture2D(texture2, TexCoordOut).r;
+    pixPermuted.b = texture2D(texture3, TexCoordOut).r;
+    pixPermuted.a = 1.0;
     
-    gl_FragColor = YpCbCrToConvert * coefficientMatrix;
+    gl_FragColor = pixPermuted;
 }

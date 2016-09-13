@@ -47,6 +47,7 @@ void main()
     YpCbCrToConvert[0] = texture2D(texture1, TexCoordOut).r;
     YpCbCrToConvert[1] = texture2D(texture2, TexCoordOut).x;
     YpCbCrToConvert[2] = texture2D(texture3, TexCoordOut).x;
+    YpCbCrToConvert[3] = 1.0;
     
     YpCbCrToConvert -= YpCbCrOffsets;
     

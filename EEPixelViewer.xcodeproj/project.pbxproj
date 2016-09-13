@@ -15,6 +15,7 @@
 		513713641D823A15006D63D5 /* iPad Screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 513713631D823A15006D63D5 /* iPad Screen.png */; };
 		513713661D8388E6006D63D5 /* PixelViewer_RGB.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 513713651D8388E6006D63D5 /* PixelViewer_RGB.glsl */; };
 		513713681D852A1F006D63D5 /* iPhone5.png in Resources */ = {isa = PBXBuildFile; fileRef = 513713671D852A1F006D63D5 /* iPhone5.png */; };
+		5137136A1D86A162006D63D5 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 513713691D86A162006D63D5 /* README.md */; };
 		5161A2F21D794B3B0012818A /* yuv.png in Resources */ = {isa = PBXBuildFile; fileRef = 5161A2F11D794B3B0012818A /* yuv.png */; };
 		516EB7CF1D764F4600CF8DF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 516EB7CE1D764F4600CF8DF5 /* main.m */; };
 		516EB7D21D764F4600CF8DF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 516EB7D11D764F4600CF8DF5 /* AppDelegate.m */; };
@@ -31,6 +32,7 @@
 		516EB7F81D76536700CF8DF5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 516EB7F71D76536700CF8DF5 /* Accelerate.framework */; };
 		516EB7FA1D7655CA00CF8DF5 /* PixelFormats.plist in Resources */ = {isa = PBXBuildFile; fileRef = 516EB7F91D7655CA00CF8DF5 /* PixelFormats.plist */; };
 		5186AF5F1D7A37B300CCC782 /* PixelViewer_RGBA.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 5186AF5E1D7A37B300CCC782 /* PixelViewer_RGBA.glsl */; };
+		51DB4C3B1D872A2800A675C1 /* PixelViewer_RGB_3P.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 51DB4C3A1D872A2800A675C1 /* PixelViewer_RGB_3P.glsl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,7 @@
 		513713631D823A15006D63D5 /* iPad Screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad Screen.png"; path = "EEPixelViewerSample/Sample Images/iPad Screen.png"; sourceTree = SOURCE_ROOT; };
 		513713651D8388E6006D63D5 /* PixelViewer_RGB.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PixelViewer_RGB.glsl; path = EEPixelViewerSample/EEPixelViewer/Shaders/PixelViewer_RGB.glsl; sourceTree = SOURCE_ROOT; };
 		513713671D852A1F006D63D5 /* iPhone5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iPhone5.png; path = "Sample Images/iPhone5.png"; sourceTree = "<group>"; };
+		513713691D86A162006D63D5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5161A2F11D794B3B0012818A /* yuv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yuv.png; path = "EEPixelViewerSample/Sample Images/yuv.png"; sourceTree = SOURCE_ROOT; };
 		516EB7CA1D764F4600CF8DF5 /* EEPixelViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EEPixelViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		516EB7CE1D764F4600CF8DF5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -65,6 +68,7 @@
 		516EB7F71D76536700CF8DF5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		516EB7F91D7655CA00CF8DF5 /* PixelFormats.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PixelFormats.plist; sourceTree = "<group>"; };
 		5186AF5E1D7A37B300CCC782 /* PixelViewer_RGBA.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PixelViewer_RGBA.glsl; path = EEPixelViewerSample/EEPixelViewer/Shaders/PixelViewer_RGBA.glsl; sourceTree = SOURCE_ROOT; };
+		51DB4C3A1D872A2800A675C1 /* PixelViewer_RGB_3P.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PixelViewer_RGB_3P.glsl; path = EEPixelViewer/Shaders/PixelViewer_RGB_3P.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,7 @@
 				5137134A1D814C28006D63D5 /* PixelViewer_YpCbCrA_1P.glsl */,
 				5186AF5E1D7A37B300CCC782 /* PixelViewer_RGBA.glsl */,
 				513713651D8388E6006D63D5 /* PixelViewer_RGB.glsl */,
+				51DB4C3A1D872A2800A675C1 /* PixelViewer_RGB_3P.glsl */,
 				516EB7EC1D764FFD00CF8DF5 /* VertexShader.glsl */,
 			);
 			name = Shaders;
@@ -107,6 +112,7 @@
 		516EB7C11D764F4600CF8DF5 = {
 			isa = PBXGroup;
 			children = (
+				513713691D86A162006D63D5 /* README.md */,
 				516EB7F71D76536700CF8DF5 /* Accelerate.framework */,
 				516EB7F51D76530D00CF8DF5 /* GLKit.framework */,
 				516EB7CC1D764F4600CF8DF5 /* EEPixelViewer */,
@@ -230,6 +236,7 @@
 				516EB7D81D764F4600CF8DF5 /* Main.storyboard in Resources */,
 				516EB7F41D76529400CF8DF5 /* iPhones.png in Resources */,
 				513713421D7F5A23006D63D5 /* PixelViewer_YpCbCr_2P.glsl in Resources */,
+				51DB4C3B1D872A2800A675C1 /* PixelViewer_RGB_3P.glsl in Resources */,
 				5137134B1D814C28006D63D5 /* PixelViewer_YpCbCrA_1P.glsl in Resources */,
 				5161A2F21D794B3B0012818A /* yuv.png in Resources */,
 			);
@@ -245,6 +252,7 @@
 				516EB7D51D764F4600CF8DF5 /* ViewController.m in Sources */,
 				516EB7D21D764F4600CF8DF5 /* AppDelegate.m in Sources */,
 				516EB7F11D764FFD00CF8DF5 /* OGLProgramManager.m in Sources */,
+				5137136A1D86A162006D63D5 /* README.md in Sources */,
 				516EB7CF1D764F4600CF8DF5 /* main.m in Sources */,
 				513713491D81251D006D63D5 /* SampleImageConverter.m in Sources */,
 				516EB7ED1D764FFD00CF8DF5 /* EEPixelViewer.m in Sources */,
@@ -364,6 +372,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/EEPixelViewerSample/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eldade.EEPixelViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -378,6 +387,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/EEPixelViewerSample/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eldade.EEPixelViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -23,9 +23,7 @@ Note that if you're displaying a video or animation, you will need to make the c
 
 ## Performance
 
-Specific performance figures obviously depend on the image resolution, the pixel format, and the device's hardware, but generally speaking you can expect decent performance from even outdated iOS devices such as the 4th generation iPad. On the iPad Air, a video playing in full Retina resolution (2048 by 1536) will usually achieve 60 FPS, consuming about 50-60% CPU (about half of one of the CPU cores). Newer devices pretty much all achieve 60 fps for such resolutions.
-
-An iPhone 5, using a test image based on the native resolution for that device (1136x640), achieves 60 fps on all supported image formats except for 24-bpp ones such as 24RGB and the 24-bit 444YpCbCr formats which achieve around 30 fps.
+Specific performance figures obviously depend on the image resolution, the pixel format, and the device's hardware, but generally speaking you can expect decent performance from even outdated iOS devices such as the 4th generation iPad (released in 2012). On that device, a video playing in full Retina resolution (2048 by 1536) will achieve 60 fps for nearly all pixel formats, consuming about 50-60% CPU (about half of one of the CPU cores), and about 30 fps for 24bpp pixel formats. 
 
 ##Supported Pixel Formats
 
