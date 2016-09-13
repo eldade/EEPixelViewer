@@ -17,7 +17,7 @@ plane.width = 1024;
 plane.height = 768;
 plane.data = pixelBuffer;
 plane.rowBytes = plane.width * 4;
-[pixelViewer displayPixelBufferPlanes: &plane count: 1 withCompletion:nil];
+[pixelViewer displayPixelBufferPlanes: &plane count: 1];
 ```
 Note that if you're displaying a video or animation, you will need to make the call to displayPixelBufferPlanes for each frame. The address of the memory buffers is not assumed to be constant across frames, and is not retained by the view. For each call to displayPixelsBufferPlanes, the bits are copied to the GPU and presented to the screen.
 
@@ -48,3 +48,4 @@ Specific performance figures obviously depend on the image resolution, the pixel
 | kCVPixelFormatType_16LE555|✅|16|1|Excellent |
 | kCVPixelFormatType_16LE5551|✅|16|1|Excellent |
 | kCVPixelFormatType_16LE565|✅|16|1|Excellent |
+

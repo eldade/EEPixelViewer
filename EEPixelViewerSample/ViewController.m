@@ -130,107 +130,6 @@
     }
 }
 
-//- (void) RGBtoYUVandBack: (void *) rawBuffer
-//{
-//    vImage_Error err = kvImageNoError;
-//    vImage_Flags flags = kvImageNoFlags;//kvImagePrintDiagnosticsToConsole;
-//    vImage_YpCbCrPixelRange pixelRange = pixelRangeVideoClamped;
-//    vImage_ARGBToYpCbCr outInfo;
-//    
-//    err = vImageConvert_ARGBToYpCbCr_GenerateConversion(kvImage_ARGBToYpCbCrMatrix_ITU_R_601_4, &pixelRange, &outInfo, kvImageARGB8888, kvImage444CrYpCb8, flags);
-//    
-//    //    vImageConvert_ARGB8888To422YpCbYpCr8
-//    
-//    vImage_YpCbCrToARGBMatrix matrix = *kvImage_YpCbCrToARGBMatrix_ITU_R_601_4;
-//    
-//    
-//    char pixels[] = { 0x00, 0x00, 0xff, 0xff, 0xff, 0x00, 0x00, 0xff, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0xff, 0xff };
-//    unsigned char yuvPixels[128];
-//    vImage_Buffer dest = { yuvPixels, 2, 2, 6};
-//    
-//    vImage_Buffer srcBuffer = { pixels, 2, 2, 8};
-//    
-//    uint8_t permuteMap[] = { 3, 2, 1, 0}; // The conversion func expects ARGB so we this tells it to expect RGBA which is our one and only source format:
-//    vImageConvert_ARGB8888To444CrYpCb8(&srcBuffer, &dest, &outInfo, permuteMap, flags);
-//    
-//    // The above produces an image in a format that's completely undefined in the CV pixel format definitions (where the Cr channel precedes Yp),
-//    // so we permute to a kCVPixelFormatType_444YpCbCr8 by flipping the first two channels. Note that the vImagePermuteChannels_RGB888 permute function
-//    // specifies RGB but it doesn't matter since it's just flipping bytes.
-//    
-//    uint8_t YpCb_permuteMap[] = {1, 0, 2 };
-//    
-////    vImagePermuteChannels_RGB888(&dest, &dest, YpCb_permuteMap, flags);
-//    
-//    // TEST: Let's convert it back:
-//    vImage_YpCbCrToARGB conversionInfo;
-//    
-//    err = vImageConvert_YpCbCrToARGB_GenerateConversion(kvImage_YpCbCrToARGBMatrix_ITU_R_601_4, &pixelRange, &conversionInfo, kvImage444CrYpCb8, kvImageARGB8888, flags);
-//    
-//    //    vImageConvert_ARGB8888To422YpCbYpCr8
-//    
-//    //    vImage_YpCbCrToARGBMatrix matrix = *kvImage_YpCbCrToARGBMatrix_ITU_R_601_4;
-//    
-//    //    uint8_t YpCb_permuteMap[] = {1, 0, 2 };
-//    
-////    vImagePermuteChannels_RGB888(&dest, &dest, YpCb_permuteMap, flags);
-//    char rgbPixels[128];
-//    
-//    vImage_Buffer destRGB_TEST = { rgbPixels, 2, 2, 8};
-//    
-//    srcBuffer = dest;
-//    
-//    uint8_t permuteMap_TEST[] = { 3, 2, 1, 0 }; // The conversion func expects ARGB so we this tells it to expect RGBA which is our one and only source format:
-//    vImageConvert_444CrYpCb8ToARGB8888(&srcBuffer, &destRGB_TEST, &conversionInfo, &permuteMap_TEST, 0xfd, kvImagePrintDiagnosticsToConsole );
-//    
-//    for (int i = 0; i < 12; i += 3)
-//    {
-//        float Cr = (float) yuvPixels[i] / 255.0;
-//        float Yp = (float) yuvPixels[i + 1] / 255.0;
-//        float Cb = (float) yuvPixels[i + 2] / 255.0;
-//        
-//        Yp -= 0.0625;
-//        Cr -= 0.5;
-//        Cb -= 0.5;
-//        
-//        Yp *= 1.1643;
-//        
-//        float r = Yp + Cr * 1.5958;
-//        float g = Yp + Cr * -0.81290 + Cb * -0.39173 ;
-//        float b = Yp + Cb * 2.017;
-////        NSLog(@"R=%f G=%f B=%f\n", r, g, b);
-//        NSLog(@"R=%x G=%x B=%x", ((int) r) * 255, ((int) g) * 255, ((int) b) * 255);
-//    }
-//    
-//}
-
-- (void) YpCbCrToRGB: (unsigned char *) yuvPixels
-{
-    for (int i = 0; i < 12; i += 3)
-    {
-        float Cb = (float) yuvPixels[i] / 255.0;
-        float Yp = (float) yuvPixels[i + 1] / 255.0;
-        float Cr = (float) yuvPixels[i + 2] / 255.0;
-        
-        Yp -= 0.0625;
-        Cr -= 0.5;
-        Cb -= 0.5;
-        
-        Yp *= 1.1643;
-        
-        NSLog(@"Yp=%f Cb=%f Cr=%f\n", Yp, Cb, Cr);
-        
-        float r = Yp + Cr * 1.5958;
-        float g = Yp - Cr * 0.81290 - Cb * 0.39173 ;
-        float b = Yp + Cb * 2.017;
-        //        NSLog(@"R=%f G=%f B=%f\n", r, g, b);
-        
-        uint8_t redFinal = (uint8_t) (MAX(MIN(255, r * 255.0), 0));
-        uint8_t greenFinal = (uint8_t) (MAX(MIN(255, g * 255.0), 0));
-        uint8_t blueFinal = (uint8_t) (MAX(MIN(255, b * 255.0), 0));
-        NSLog(@"R=%x G=%x B=%x", redFinal, greenFinal, blueFinal);
-    }
-}
-
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     if (timer != nil)
@@ -251,12 +150,7 @@
     
     UIImage *sourceImage = [UIImage imageNamed: imageToLoad];
     void *rawBuffer = [self imageDataFromUIImage: sourceImage];
-    
-    char pixels[] = { 0x00, 0x00, 0xff, 0xff, 0xff, 0x00, 0x00, 0xff, 0x00, 0xff, 0x00, 0xff, 0x00, 0x00, 0xff, 0xff };
-    
-//    rawBuffer = pixels;
-//    sourceImageSize = CGSizeMake(2, 2);
-    
+        
     CGSize sourceImageSize = sourceImage.size;
     
     vImage_Buffer sourceBuffer = { rawBuffer, sourceImageSize.height, sourceImageSize.width, sourceImageSize.width * 4 };
